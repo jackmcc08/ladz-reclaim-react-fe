@@ -19,14 +19,26 @@ class App extends React.Component {
     })
   }
 
+  handleRewardClick() {
+    console.log("I have been clicked")
+  }
+
   render() {
+
+    let button;
+      if (this.state.numStamps === 10) {
+        button = <ClaimReward onClick={() => this.handleRewardClick} />;
+      } else {
+        button = <AddStamp onClick={() => this.handleClick()}/>;
+      }
+
     return (
       <div className="App">
         <header className="App-header">
           <h1>RECLAIM!</h1>
         </header>
         <main className="App-body">
-          <AddStamp onClick={() => this.handleClick()}/>
+          {button}
           <StampCounter numStamps={this.state.numStamps}/>
         </main>
       </div>
@@ -48,6 +60,12 @@ function StampCounter(props) {
   )
 }
 
-  //
+function ClaimReward(props) {
+  return (
+    <button className="claimReward" onClick={props.onClick}>
+      Claim reward!
+    </button>
+  )
+}
 
 export default App;
