@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 
 
@@ -26,19 +26,27 @@ class App extends React.Component {
     })
   }
 
-  render() {
+  handleUseRewardClick() {
+    this.setState({
+      numStamps: 0,
+      displayReward: false,
+    })
+  }
 
+  render() {
     let rewards;
-      if (this.state.displayReward === true) {
-        rewards = <RewardScreen />
-      }
+    if (this.state.displayReward) {
+      rewards = <RewardScreen />
+    }
 
     let button;
-      if (this.state.numStamps === 10) {
-        button = <ClaimReward onClick={() => this.handleRewardClick} />;
-      } else {
-        button = <AddStamp onClick={() => this.handleClick()}/>;
-      }
+    if (this.state.displayReward) {
+      button = <UseReward onClick={() => this.handleUseRewardClick()} />;
+    } else if (this.state.numStamps === 10) {
+      button = <ClaimReward onClick={() => this.handleRewardClick()} />;
+    } else {
+      button = <AddStamp onClick={() => this.handleClick()}/>;
+    }
 
     return (
       <div className="App">
@@ -77,9 +85,19 @@ function ClaimReward(props) {
   )
 }
 
+function UseReward(props) {
+  return (
+    <button className="useReward" onClick={props.onClick}>
+      Use reward!
+    </button>
+  )
+}
+
 function RewardScreen(props) {
   return(
-  <h1>"Here's 10% off of some milk!"</h1>
+    <h1>
+      Here's 10% off of some milk!
+    </h1>
   )
 }
 
