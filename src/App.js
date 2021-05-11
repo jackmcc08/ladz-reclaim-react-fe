@@ -8,6 +8,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       numStamps: 0,
+      displayReward: false,
     }
   }
 
@@ -20,10 +21,17 @@ class App extends React.Component {
   }
 
   handleRewardClick() {
-    console.log("I have been clicked")
+    this.setState({
+      displayReward: true
+    })
   }
 
   render() {
+
+    let rewards;
+      if (this.state.displayReward === true) {
+        rewards = <RewardScreen />
+      }
 
     let button;
       if (this.state.numStamps === 10) {
@@ -39,6 +47,7 @@ class App extends React.Component {
         </header>
         <main className="App-body">
           {button}
+          {rewards}
           <StampCounter numStamps={this.state.numStamps}/>
         </main>
       </div>
@@ -65,6 +74,12 @@ function ClaimReward(props) {
     <button className="claimReward" onClick={props.onClick}>
       Claim reward!
     </button>
+  )
+}
+
+function RewardScreen(props) {
+  return(
+  <h1>"Here's 10% off of some milk!"</h1>
   )
 }
 
