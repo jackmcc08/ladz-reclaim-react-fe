@@ -1,6 +1,8 @@
+import { get } from 'jquery';
 import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
 
 
 class App extends React.Component {
@@ -8,6 +10,11 @@ class App extends React.Component {
     super(props);
     this.state = {
       numStamps: 0,
+      test: axios.get('https://reclaim-api.herokuapp.com/api/v1/stamps')
+      .then(function (response) {
+        console.log(response);
+        response.data
+      }),
       displayReward: false,
     }
   }
