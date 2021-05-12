@@ -1,4 +1,4 @@
-import { get } from 'jquery';
+// import { get } from 'jquery';
 import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
@@ -9,14 +9,30 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      numStamps: 0,
-      test: axios.get('https://reclaim-api.herokuapp.com/api/v1/stamps')
-      .then(function (response) {
-        console.log(response);
-        response.data
-      }),
+      numStamps: this.getInitialStamps(),
       displayReward: false,
     }
+  }
+
+  getInitialStamps() {
+    axios.get('https://reclaim-api.herokuapp.com/api/v1/stamps')
+    .then(function (response) {
+      let stampCounter = 0;
+      console.log(response);
+      console.log(response.data);
+      response.data.forEach(stamp => {
+        if (stamp.user_id === "666" && !stamp.redeemed) {
+          stampCounter += 1;
+        }
+      });
+      console.log(stampCounter);
+      return stampCounter;
+    })
+    .then(stampCounter => {
+      this.setState({
+        numStamps: stampCounter
+      })
+    })
   }
 
   handleClick() {
