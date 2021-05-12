@@ -102,3 +102,4 @@ function RewardScreen(props) {
 }
 
 export default App;
+export { AddStamp, StampCounter, ClaimReward, UseReward, RewardScreen };
