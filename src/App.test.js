@@ -39,8 +39,6 @@ describe('App', () => {
   })
 })
 
-
-
 describe('#AddStamp', () => {
   it('renders a button which can add stamps', () => {
     render(<AddStamp />);
