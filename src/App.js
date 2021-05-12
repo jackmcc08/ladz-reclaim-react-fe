@@ -9,23 +9,20 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      numStamps: this.getInitialStamps(),
+      numStamps: this.getCurrentStamps(),
       displayReward: false,
     }
   }
 
-  getInitialStamps() {
+  getCurrentStamps() {
     axios.get('https://reclaim-api.herokuapp.com/api/v1/stamps')
     .then(function (response) {
       let stampCounter = 0;
-      console.log(response);
-      console.log(response.data);
       response.data.forEach(stamp => {
-        if (stamp.user_id === "666" && !stamp.redeemed) {
+        if (stamp.user_id === "8" && !stamp.redeemed) {
           stampCounter += 1;
         }
       });
-      console.log(stampCounter);
       return stampCounter;
     })
     .then(stampCounter => {
@@ -35,12 +32,28 @@ class App extends React.Component {
     })
   }
 
-  handleClick() {
-    const history = this.state.numStamps
-    const current = history + 1
-    this.setState({
-      numStamps: current,
+  createStamp() {
+    axios.post('https://reclaim-api.herokuapp.com/api/v1/stamps', {
+      user_id: 8,
+      business_id: 8,
+      redeemed: false,
     })
+    .then(function (response) {
+      console.log(response)
+    })
+    .then(() => {
+      this.getCurrentStamps()
+    })
+  }
+
+  handleClick() {
+    // const history = this.state.numStamps
+    // const current = history + 1
+    this.createStamp()
+
+    // this.setState({
+    //   numStamps: current,
+    // })
   }
 
   handleRewardClick() {
