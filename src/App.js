@@ -32,6 +32,32 @@ class App extends React.Component {
     })
   }
 
+  patchRedeemedStamps() {
+    axios.get('https://reclaim-api.herokuapp.com/api/v1/stamps')
+    .then(function (response) {
+      let unredeemedStamps = []
+      response.data.forEach(stamp => {
+        if (stamp.user_id === "8" && !stamp.redeemed) {
+          unredeemedStamps.push(stamp)
+        }
+      })
+      console.log(unredeemedStamps)
+      return unredeemedStamps;
+    })
+    .then(function(unredeemedStamps) {
+      unredeemedStamps.forEach(stamp => {
+        axios.patch(`https://reclaim-api.herokuapp.com/api/v1/stamps/${stamp.id}`, {
+          redeemed: true,
+        })
+      })
+    })
+    .then(() => {this.setState({
+      numStamps: this.getCurrentStamps(),
+      displayReward: false,
+    })})
+  }
+
+
   createStamp() {
     axios.post('https://reclaim-api.herokuapp.com/api/v1/stamps', {
       user_id: 8,
@@ -50,7 +76,6 @@ class App extends React.Component {
     // const history = this.state.numStamps
     // const current = history + 1
     this.createStamp()
-
     // this.setState({
     //   numStamps: current,
     // })
@@ -63,10 +88,7 @@ class App extends React.Component {
   }
 
   handleUseRewardClick() {
-    this.setState({
-      numStamps: 0,
-      displayReward: false,
-    })
+    this.patchRedeemedStamps()
   }
 
   render() {
