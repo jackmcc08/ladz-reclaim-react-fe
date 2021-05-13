@@ -18,10 +18,43 @@ const useStamps = () => {
 }
 
 const Stamp = ({ id, user_id, redeemed }) => {
+  const data = { 
+    user_id: 9,
+    business_id: 8,
+    redeemed: false,
+  }
+  
+  const [isStamped, setIsStamped] = useState(redeemed)
+
+  const onStampButtonClicked = async () => {
+    const response = await fetch(`https://reclaim-api.herokuapp.com/api/v1/stamps`,
+    {
+      method: POST,
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    }
+
+    )
+  }
   return (
     <button className="stamp" onClick={props.onClick}>
-    {props.value}
+      {props.value}
     </button>
+  )
+}
+
+const StampCard = () => {
+  const [stamps] = useStamps();
+
+  return (
+    <div className="stamp-card">
+      {stamps.map((stamp) => (
+        <Stamp key={`stamp-${stamp.id}`} {...stamp} />
+      ))}
+    </div>
   )
 }
 
