@@ -15,25 +15,15 @@ class App extends React.Component {
     }
   }
 
-  // was attempting to refactor out the setState refresh, but is not working.
-  // refreshStampsState(value) {
-  //   this.setState({
-  //     numStamps: value,
-  //   })
-  // }
-
   getCurrentStamps() {
     axios.get('https://reclaim-api.herokuapp.com/api/v1/stamps')
-    .then(function (response) {
+    .then((response) => {
       let stampCounter = 0;
       response.data.forEach(stamp => {
         if (stamp.user_id === "8" && !stamp.redeemed) {
           stampCounter += 1;
         }
       });
-      return stampCounter;
-    })
-    .then(stampCounter => {
       this.setState({
         numStamps: stampCounter
       })
@@ -60,26 +50,18 @@ class App extends React.Component {
           unredeemedStamps.push(stamp)
         }
       })
-      // console.log(unredeemedStamps)
       return unredeemedStamps;
     })
-    .then(function(unredeemedStamps) {
+    .then(unredeemedStamps => {
       unredeemedStamps.forEach(stamp => {
         axios.patch(`https://reclaim-api.herokuapp.com/api/v1/stamps/${stamp.id}`, {
           redeemed: true,
         })
-      })
+      });
     })
     .then(() => {
-      // console.log(this.state.numStamps)
-      this.getCurrentStamps()
-      // this.setState({
-      //   // issue where the numStamps maintains at 10 when the page is re-rendered
-      //   // numStamps: this.getCurrentStamps(),
-      //   displayReward: false,
-      // })
-    }).then(() => {
       this.setState({
+        numStamps: 0,
         displayReward: false,
       })
     })
@@ -87,9 +69,6 @@ class App extends React.Component {
 
   handleClick() {
     this.createStamp()
-    // .then(() => {
-    //   this.getCurrentStamps()
-    // })
   }
 
   handleRewardClick() {
@@ -110,8 +89,11 @@ class App extends React.Component {
 
     let button;
     if (this.state.displayReward) {
-      button = <UseReward onClick={() => this.handleUseRewardClick()} />;
-    } else if (this.state.numStamps === 10) {
+      button = <UseReward onClick={(event) => {
+        event.preventDefault();
+        this.handleUseRewardClick()
+      }} />;
+    } else if (this.state.numStamps >= 10) {
       button = <ClaimReward onClick={() => this.handleRewardClick()} />;
     } else {
       button = <AddStamp onClick={() => this.handleClick()}/>;
@@ -156,7 +138,10 @@ function ClaimReward(props) {
 
 function UseReward(props) {
   return (
-    <button className="useReward" onClick={props.onClick}>
+    <button
+      className="useReward"
+      onClick={props.onClick}
+    >
       Use reward!
     </button>
   )
