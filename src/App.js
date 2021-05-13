@@ -1,9 +1,6 @@
-// import { get } from 'jquery';
 import React from 'react';
-// import logo from './logo.svg';
 import './App.css';
-// import axios from 'axios';
-import { createStamp, currentNumStamps, patchRedeemedStamps } from './StampsApiInterface.js'
+import { createStamp, getCurrentNumStamps, patchRedeemedStamps } from './StampsApiInterface.js'
 
 
 class App extends React.Component {
@@ -16,81 +13,24 @@ class App extends React.Component {
   }
 
   currentNumStamps() {
-    // axios.get('https://reclaim-api.herokuapp.com/api/v1/stamps')
-    // .then((response) => {
-    //   // console.log(response.data)
-    //   let stampCounter = 0;
-    //   response.data.forEach(stamp => {
-    //     if (stamp.user_id === "8" && !stamp.redeemed) {
-    //       stampCounter += 1;
-    //     }
-    //   });
-    //   this.setState({
-    //     numStamps: stampCounter
-    //   })
-    // })
-    currentNumStamps().then((numStamps)=> {
+    getCurrentNumStamps().then((numStamps)=> {
       this.setState({
         numStamps: numStamps
       })
     })
   }
 
-  // createStamp() {
-  //   axios.post('https://reclaim-api.herokuapp.com/api/v1/stamps', {
-  //     user_id: 8,
-  //     business_id: 8,
-  //     redeemed: false,
-  //   })
-  //   .then(() => {
-  //     this.getCurrentStamps()
-  //   })
-  // }
-
   redeemStamps() {
-    // axios.get('https://reclaim-api.herokuapp.com/api/v1/stamps')
-    // .then(function (response) {
-    //   let unredeemedStamps = []
-    //   response.data.forEach(stamp => {
-    //     if (stamp.user_id === "8" && !stamp.redeemed) {
-    //       unredeemedStamps.push(stamp)
-    //     }
-    //   })
-    //   return unredeemedStamps;
-    // })
-    // .then(unredeemedStamps => {
-    //   unredeemedStamps.forEach(stamp => {
-    //     axios.patch(`https://reclaim-api.herokuapp.com/api/v1/stamps/${stamp.id}`, {
-    //       redeemed: true,
-    //     })
-    //   });
-    // })
     patchRedeemedStamps()
-    // .then(() => {
-    //   currentNumStamps().then((numStamps)=> {
-    //     this.setState({
-    //       numStamps: numStamps,
-    //       displayReward: false,
-    //     })
-    //   })
-    // })
     .then(() => {
       this.setState({
         numStamps: 0,
         displayReward: false,
       })
     })
-    // .then(() =>
-    // currentNumStamps().then((numStamps)=> {
-    //   this.setState({
-    //     numStamps: numStamps
-    //   })
-    // })
-  // )
   }
 
   handleClick() {
-    // this.createStamp()
     createStamp()
     .then(() => {
       this.currentNumStamps()

@@ -1,4 +1,3 @@
-// import React from 'react';
 import axios from 'axios';
 
 async function createStamp() {
@@ -17,10 +16,9 @@ async function getStampRecords() {
   return stampRecords
 }
 
-async function currentNumStamps() {
+async function getCurrentNumStamps() {
   let numStamps = await getStampRecords()
   .then((stampRecords) => {
-    // console.log(stampRecords)
     let stampCounter = 0;
     stampRecords.forEach(stamp => {
       if (stamp.user_id === "8" && !stamp.redeemed) {
@@ -53,4 +51,4 @@ async function patchRedeemedStamps() {
   return result
 }
 
-export { createStamp, currentNumStamps, patchRedeemedStamps };
+export { createStamp, getCurrentNumStamps, patchRedeemedStamps };
