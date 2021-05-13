@@ -18,6 +18,7 @@ class App extends React.Component {
   getCurrentStamps() {
     axios.get('https://reclaim-api.herokuapp.com/api/v1/stamps')
     .then((response) => {
+      // console.log(response.data)
       let stampCounter = 0;
       response.data.forEach(stamp => {
         if (stamp.user_id === "8" && !stamp.redeemed) {
