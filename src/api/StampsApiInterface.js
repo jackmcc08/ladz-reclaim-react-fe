@@ -51,4 +51,4 @@ async function patchRedeemedStamps() {
   return result
 }
 
-export { createStamp, getCurrentNumStamps, patchRedeemedStamps };
+export { createStamp, getCurrentNumStamps, patchRedeemedStamps, getStampRecords };

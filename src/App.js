@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { createStamp, getCurrentNumStamps, patchRedeemedStamps } from './StampsApiInterface.js'
+import { createStamp, getCurrentNumStamps, patchRedeemedStamps } from './api/StampsApiInterface.js'
 
 
 class App extends React.Component {

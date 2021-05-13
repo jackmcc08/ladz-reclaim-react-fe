@@ -4,6 +4,7 @@ import { unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 
 import axios from 'axios';
+import { createStamp, getCurrentNumStamps, patchRedeemedStamps } from './api/StampsApiInterface.js';
 import App, { AddStamp, StampCounter, ClaimReward, UseReward, RewardScreen } from './App';
 
 // key code for testing from https://reactjs.org/docs/testing-recipes.html
@@ -48,7 +49,7 @@ describe('App', () => {
   });
 
   test('renders App header', async () => {
-    
+
     jest.spyOn(axios, 'get').mockImplementationOnce(() =>
       Promise.resolve(fakeData)
     )
@@ -66,6 +67,11 @@ describe('App', () => {
     jest.spyOn(axios, 'get').mockImplementationOnce(() =>
       Promise.resolve(fakeData)
     )
+
+    // 
+    // jest.spyOn(getCurrentNumStamps).mockImplementationOnce(() => {
+    //   return 1
+    // })
 
     await act(async () => {
       await render(<App />);
