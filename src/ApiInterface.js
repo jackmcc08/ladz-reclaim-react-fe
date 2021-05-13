@@ -12,26 +12,47 @@ async function createStamp() {
 
 // this function is not in use, I was attempting to move functionality from App.js to a seperate ApiInterface.js file.
 async function getStampRecords() {
-  axios.get('https://reclaim-api.herokuapp.com/api/v1/stamps').then(response => {
-    // console.log(response)
-    return response
+  let stampRecords = await axios.get('https://reclaim-api.herokuapp.com/api/v1/stamps').then(response => {
+    return response.data
   })
+  return stampRecords
 }
 
-// this function is not in use, I was attempting to move functionality from App.js to a seperate ApiInterface.js file.
-function getCurrentStamps() {
-  axios.get('https://reclaim-api.herokuapp.com/api/v1/stamps')
-  .then((response) => {
-    // console.log(response)
+async function currentNumStamps() {
+  let numStamps = await getStampRecords().then((stampRecords) => {
+    console.log(stampRecords)
     let stampCounter = 0;
-    response.data.forEach(stamp => {
+    stampRecords.forEach(stamp => {
       if (stamp.user_id === "8" && !stamp.redeemed) {
         stampCounter += 1;
       }
     });
-    return stampCounter;
+    // console.log(stampCounter)
+    return stampCounter
   })
+  // console.log(numStamps)
+  return numStamps
 }
 
 
-export { createStamp, getStampRecords, getCurrentStamps };
+
+// async function test() {
+//   let test = await getStampRecords()
+//   console.log(test)
+// }
+//
+// function test2() {
+//   let results = getStampRecords().then((response) => {
+//     console.log("this is it")
+//     console.log(response[0])
+//     return response[0]
+//   })
+//   console.log(results)
+//   // console.log(test)
+// }
+
+
+// test2()
+// currentNumStamps()
+
+export { createStamp, currentNumStamps };

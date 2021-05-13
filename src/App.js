@@ -3,7 +3,7 @@ import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
-// import { createStamp, getStampRecords, getCurrentStamps } from './ApiInterface.js'
+import { createStamp, currentNumStamps } from './ApiInterface.js'
 
 
 class App extends React.Component {
@@ -16,17 +16,22 @@ class App extends React.Component {
   }
 
   getCurrentStamps() {
-    axios.get('https://reclaim-api.herokuapp.com/api/v1/stamps')
-    .then((response) => {
-      // console.log(response.data)
-      let stampCounter = 0;
-      response.data.forEach(stamp => {
-        if (stamp.user_id === "8" && !stamp.redeemed) {
-          stampCounter += 1;
-        }
-      });
+    // axios.get('https://reclaim-api.herokuapp.com/api/v1/stamps')
+    // .then((response) => {
+    //   // console.log(response.data)
+    //   let stampCounter = 0;
+    //   response.data.forEach(stamp => {
+    //     if (stamp.user_id === "8" && !stamp.redeemed) {
+    //       stampCounter += 1;
+    //     }
+    //   });
+    //   this.setState({
+    //     numStamps: stampCounter
+    //   })
+    // })
+    currentNumStamps().then((numStamps)=> {
       this.setState({
-        numStamps: stampCounter
+        numStamps: numStamps
       })
     })
   }
@@ -70,6 +75,10 @@ class App extends React.Component {
 
   handleClick() {
     this.createStamp()
+    // createStamp()
+    // .then(() => {
+    //   this.getCurrentStamps()
+    // })
   }
 
   handleRewardClick() {
