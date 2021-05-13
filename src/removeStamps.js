@@ -4,7 +4,7 @@ import fetch from 'node-fetch'
 import axios from 'axios';
 
 function removeStamps() {
-  for (let i = 9; i < 55; i++) {
+  for (let i = 284; i <= 335; i++) {
     fetch('https://reclaim-api.herokuapp.com/api/v1/stamps/' + i, {
       method: 'DELETE',
     })

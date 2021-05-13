@@ -3,6 +3,7 @@ import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
+// import { createStamp, getStampRecords, getCurrentStamps } from './ApiInterface.js'
 
 
 class App extends React.Component {
@@ -13,6 +14,13 @@ class App extends React.Component {
       displayReward: false,
     }
   }
+
+  // was attempting to refactor out the setState refresh, but is not working.
+  // refreshStampsState(value) {
+  //   this.setState({
+  //     numStamps: value,
+  //   })
+  // }
 
   getCurrentStamps() {
     axios.get('https://reclaim-api.herokuapp.com/api/v1/stamps')
@@ -32,6 +40,17 @@ class App extends React.Component {
     })
   }
 
+  createStamp() {
+    axios.post('https://reclaim-api.herokuapp.com/api/v1/stamps', {
+      user_id: 8,
+      business_id: 8,
+      redeemed: false,
+    })
+    .then(() => {
+      this.getCurrentStamps()
+    })
+  }
+
   patchRedeemedStamps() {
     axios.get('https://reclaim-api.herokuapp.com/api/v1/stamps')
     .then(function (response) {
@@ -41,7 +60,7 @@ class App extends React.Component {
           unredeemedStamps.push(stamp)
         }
       })
-      console.log(unredeemedStamps)
+      // console.log(unredeemedStamps)
       return unredeemedStamps;
     })
     .then(function(unredeemedStamps) {
@@ -51,33 +70,25 @@ class App extends React.Component {
         })
       })
     })
-    .then(() => {this.setState({
-      numStamps: this.getCurrentStamps(),
-      displayReward: false,
-    })})
-  }
-
-
-  createStamp() {
-    axios.post('https://reclaim-api.herokuapp.com/api/v1/stamps', {
-      user_id: 8,
-      business_id: 8,
-      redeemed: false,
-    })
-    .then(function (response) {
-      console.log(response)
-    })
     .then(() => {
+      // console.log(this.state.numStamps)
       this.getCurrentStamps()
+      // this.setState({
+      //   // issue where the numStamps maintains at 10 when the page is re-rendered
+      //   // numStamps: this.getCurrentStamps(),
+      //   displayReward: false,
+      // })
+    }).then(() => {
+      this.setState({
+        displayReward: false,
+      })
     })
   }
 
   handleClick() {
-    // const history = this.state.numStamps
-    // const current = history + 1
     this.createStamp()
-    // this.setState({
-    //   numStamps: current,
+    // .then(() => {
+    //   this.getCurrentStamps()
     // })
   }
 
