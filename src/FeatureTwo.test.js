@@ -22,8 +22,8 @@ afterEach(() => {
   container = null;
 })
 
-describe('Feature Two - using rewards button', () => {
-  it('When user clicks on add stamp button, one stamp is added', async () => {
+describe('Feature Two - simulates claiming and using rewards', () => {
+  it('When user clicks on add stamp button, gets 10 stamps and then claims and uses reward', async () => {
     const fakeData = {
     "data": [
         {
@@ -312,7 +312,6 @@ describe('Feature Two - using rewards button', () => {
 
     await act(async () => {
       await fireEvent.click(buttonAddStamp)
-      // button.click(new MouseEvent("click"))
     });
 
     const numStamps2 = screen.getByText(/Stamps: 10/i);
@@ -322,7 +321,6 @@ describe('Feature Two - using rewards button', () => {
 
     await act(async () => {
       await fireEvent.click(buttonClaimReward)
-      // button.click(new MouseEvent("click"))
     });
 
     const buttonElementUR = screen.getByText(/Use Reward/i);
@@ -345,7 +343,6 @@ describe('Feature Two - using rewards button', () => {
 
     await act(async () => {
       await fireEvent.click(buttonAddStamp2)
-      // button.click(new MouseEvent("click"))
     });
 
     const numStamps4 = screen.getByText(/Stamps: 1/i);

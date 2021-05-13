@@ -247,14 +247,13 @@ describe('Feature One - using add stamp button', () => {
     const buttonElement = screen.getByText(/Add Stamp/i);
     expect(buttonElement).toBeInTheDocument();
 
-    const numStamps = screen.getByText(/5/i);
+    const numStamps = screen.getByText(/Stamps: 5/i);
     expect(numStamps).toBeInTheDocument();
 
     const button = screen.getByText("Add Stamp")
 
     await act(async () => {
       await fireEvent.click(button)
-      // button.click(new MouseEvent("click"))
     });
 
     const numStamps2 = screen.getByText(/Stamps: 6/i);
