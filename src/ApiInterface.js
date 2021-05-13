@@ -1,16 +1,15 @@
 import React from 'react';
 import axios from 'axios';
 
-// this function is not in use, I was attempting to move functionality from App.js to a seperate ApiInterface.js file.
 async function createStamp() {
-  axios.post('https://reclaim-api.herokuapp.com/api/v1/stamps', {
+  let newStamp = await axios.post('https://reclaim-api.herokuapp.com/api/v1/stamps', {
     user_id: 8,
     business_id: 8,
     redeemed: false,
   })
+  return newStamp
 }
 
-// this function is not in use, I was attempting to move functionality from App.js to a seperate ApiInterface.js file.
 async function getStampRecords() {
   let stampRecords = await axios.get('https://reclaim-api.herokuapp.com/api/v1/stamps').then(response => {
     return response.data

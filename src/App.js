@@ -36,16 +36,16 @@ class App extends React.Component {
     })
   }
 
-  createStamp() {
-    axios.post('https://reclaim-api.herokuapp.com/api/v1/stamps', {
-      user_id: 8,
-      business_id: 8,
-      redeemed: false,
-    })
-    .then(() => {
-      this.getCurrentStamps()
-    })
-  }
+  // createStamp() {
+  //   axios.post('https://reclaim-api.herokuapp.com/api/v1/stamps', {
+  //     user_id: 8,
+  //     business_id: 8,
+  //     redeemed: false,
+  //   })
+  //   .then(() => {
+  //     this.getCurrentStamps()
+  //   })
+  // }
 
   patchRedeemedStamps() {
     axios.get('https://reclaim-api.herokuapp.com/api/v1/stamps')
@@ -74,11 +74,11 @@ class App extends React.Component {
   }
 
   handleClick() {
-    this.createStamp()
-    // createStamp()
-    // .then(() => {
-    //   this.getCurrentStamps()
-    // })
+    // this.createStamp()
+    createStamp()
+    .then(() => {
+      this.getCurrentStamps()
+    })
   }
 
   handleRewardClick() {
