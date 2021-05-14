@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
@@ -5,12 +6,10 @@ const useStamps = () => {
   const [stamps, setStamps] = useState([]);
 
   const fetchStamps = async () => {
-    const res = await fetch('https://reclaim-api.herokuapp.com/api/v1/stamps', {
-      method: 'GET',
-    });
-    const json = await res.json();
+    const res = await axios.get('https://reclaim-api.herokuapp.com/api/v1/stamps')
 
-    setStamps(json);
+
+    setStamps(res.data);
   };
 
   useEffect(() => fetchStamps(), []);
