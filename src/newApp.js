@@ -2,6 +2,15 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
+const createStamp = async () => {
+  const newStamp = await axios.post('https://reclaim-api.herokuapp.com/api/v1/stamps', {
+    user_id: 10,
+    business_id: 10,
+    redeemed: false,
+  })
+  return newStamp
+}
+
 const useStamps = () => {
   const [stamps, setStamps] = useState([]);
 
@@ -46,7 +55,9 @@ const StampCard = () => {
   }
 
   const onStampSubmitted = () => {
-    stampCount += 1;
+    createStamp()
+    
+    stampCount()
     if(stampCount === 10) { setRewardActive(true) }
   }
 
@@ -55,6 +66,11 @@ const StampCard = () => {
       <div className="top-row">
         {stampCount().length}
       </div>
+        { !rewardActive ? (
+          <button onClick={() => onStampSubmitted()} className="add-stamp">Add Stamp</button>
+        ) : (
+          <p>placeholder</p>
+        )}
       <div className="reward-button">
         { rewardActive ? (
           <button className="claim-button">Claim Reward</button>
