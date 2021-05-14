@@ -48,19 +48,19 @@ describe('App', () => {
     expect(buttonElement).toBeInTheDocument();
   });
 
-  test('renders App header', async () => {
-
-    jest.spyOn(axios, 'get').mockImplementationOnce(() =>
-      Promise.resolve(fakeData)
-    )
-
-    await act(async () => {
-      await render(<App />);
-    });
-
-    const headerElement = screen.getByText("RECLAIM!");
-    expect(headerElement).toBeInTheDocument();
-  });
+  // test('renders App header', async () => {
+  //
+  //   jest.spyOn(axios, 'get').mockImplementationOnce(() =>
+  //     Promise.resolve(fakeData)
+  //   )
+  //
+  //   await act(async () => {
+  //     await render(<App />);
+  //   });
+  //
+  //   const headerElement = screen.getByText("RECLAIM!");
+  //   expect(headerElement).toBeInTheDocument();
+  // });
 
   test('renders App counter', async () => {
 
@@ -68,7 +68,7 @@ describe('App', () => {
       Promise.resolve(fakeData)
     )
 
-    // 
+    //
     // jest.spyOn(getCurrentNumStamps).mockImplementationOnce(() => {
     //   return 1
     // })
