@@ -1,65 +1,27 @@
-// import { get } from 'jquery';
 import React from 'react';
-// import logo from './logo.svg';
 import './App.css';
-import axios from 'axios';
-// import { createStamp, getStampRecords, getCurrentStamps } from './ApiInterface.js'
+import { createStamp, getCurrentNumStamps, patchRedeemedStamps } from './api/StampsApiInterface.js'
 
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      numStamps: this.getCurrentStamps(),
+      numStamps: this.currentNumStamps(),
       displayReward: false,
     }
   }
 
-  getCurrentStamps() {
-    axios.get('https://reclaim-api.herokuapp.com/api/v1/stamps')
-    .then((response) => {
-      // console.log(response.data)
-      let stampCounter = 0;
-      response.data.forEach(stamp => {
-        if (stamp.user_id === "8" && !stamp.redeemed) {
-          stampCounter += 1;
-        }
-      });
+  currentNumStamps() {
+    getCurrentNumStamps().then((numStamps)=> {
       this.setState({
-        numStamps: stampCounter
+        numStamps: numStamps
       })
     })
   }
 
-  createStamp() {
-    axios.post('https://reclaim-api.herokuapp.com/api/v1/stamps', {
-      user_id: 8,
-      business_id: 8,
-      redeemed: false,
-    })
-    .then(() => {
-      this.getCurrentStamps()
-    })
-  }
-
-  patchRedeemedStamps() {
-    axios.get('https://reclaim-api.herokuapp.com/api/v1/stamps')
-    .then(function (response) {
-      let unredeemedStamps = []
-      response.data.forEach(stamp => {
-        if (stamp.user_id === "8" && !stamp.redeemed) {
-          unredeemedStamps.push(stamp)
-        }
-      })
-      return unredeemedStamps;
-    })
-    .then(unredeemedStamps => {
-      unredeemedStamps.forEach(stamp => {
-        axios.patch(`https://reclaim-api.herokuapp.com/api/v1/stamps/${stamp.id}`, {
-          redeemed: true,
-        })
-      });
-    })
+  redeemStamps() {
+    patchRedeemedStamps()
     .then(() => {
       this.setState({
         numStamps: 0,
@@ -69,7 +31,10 @@ class App extends React.Component {
   }
 
   handleClick() {
-    this.createStamp()
+    createStamp()
+    .then(() => {
+      this.currentNumStamps()
+    })
   }
 
   handleRewardClick() {
@@ -79,7 +44,7 @@ class App extends React.Component {
   }
 
   handleUseRewardClick() {
-    this.patchRedeemedStamps()
+    this.redeemStamps()
   }
 
   render() {
