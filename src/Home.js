@@ -1,13 +1,34 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from 'react-router-dom'
+import Login, { LoginButton, SignUpButton } from './Login.js';
+import App from './App';
 
 const Home = () => {
     return (
-    <div>
-        <Link to='/login'>Log In</Link>
-        <br></br>
-        <Link to='/signup'>Sign Up</Link>
-    </div>
+    <Router>
+      <div>
+          <Link to='/signup'>Sign Up</Link>
+          <br></br>
+          <Link to='/stamps'>Stamps</Link>
+      </div>
+
+      <Switch>
+        <Route exact path="/">
+          <Login />
+        </Route>
+        <Route exact path="/signup">
+          <Login />
+        </Route>
+        <Route exact path="/stamps">
+          <App />
+        </Route>
+      </Switch>
+    </Router>
     );
 };
 

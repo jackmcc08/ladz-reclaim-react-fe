@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import {Link} from 'react-router-dom'
+// import {Link} from 'react-router-dom'
 
 class Login extends Component {
     constructor(props) {
@@ -22,11 +22,13 @@ class Login extends Component {
     handleSubmit = (event) => {
         event.preventDefault()
       };
+
     render() {
-        const {username, password} = this.statereturn (
+        const {username, password} = this.state
+        return (
           <div>
-            <h1>Log In</h1>        
-    <form onSubmit={this.handleSubmit}>
+            <h1>Log In</h1>
+              <form onSubmit={this.handleSubmit}>
               <input
                 placeholder="username"
                 type="text"
@@ -40,19 +42,44 @@ class Login extends Component {
                 name="password"
                 value={password}
                 onChange={this.handleChange}
-              />         
-    <button placeholder="submit" type="submit">
+              />
+              <button placeholder="submit" type="submit">
                 Log In
-              </button>          
-              <div>
-                or <Link to='/signup'>sign up</Link>
-              </div>
-              
-             </form>
-          </div>
-        );
-      }
-    }
+              </button>
+         </form>
+      </div>
+    );
+  }
+}
+
+function LoginButton(props) {
+  return (
+    <button
+      className="loginButton"
+    >
+      Login
+    </button>
+  )
+}
+
+function SignUpButton(props) {
+  return (
+    <button
+      className="signUpButton"
+    >
+      Sign Up
+    </button>
+  )
 }
 
 export default Login;
+export { LoginButton, SignUpButton };
+
+
+// Click Login BUtton
+// displays form
+// Enter form username & password
+// Click Submit
+// Routes to Session creator
+// api pings back yes or no
+// Session created - now logged in

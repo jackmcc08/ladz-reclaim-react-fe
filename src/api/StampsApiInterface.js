@@ -48,7 +48,10 @@ async function patchRedeemedStamps() {
       })
     });
   })
-  return result
+  return result // returns undefined
 }
 
 export { createStamp, getCurrentNumStamps, patchRedeemedStamps, getStampRecords };
+
+
+axios.get('https://reclaim-api.herokuapp.com/api/v1/stamps').then((response) => {console.log(response.data)})
