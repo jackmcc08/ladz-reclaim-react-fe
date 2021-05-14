@@ -8,8 +8,7 @@ const useStamps = () => {
   const fetchStamps = async () => {
     const res = await axios.get('https://reclaim-api.herokuapp.com/api/v1/stamps')
 
-
-    setStamps(res.data);
+    setStamps(res.data)
   };
 
   useEffect(() => fetchStamps(), []);
@@ -40,7 +39,11 @@ const StampCard = () => {
   const [rewardActive, setRewardActive] = useState(false)
   const [stamps] = useStamps();
 
-  let stampCount = 0;
+  const stampCount = () => {
+    const userStamps = stamps.filter(stamp => stamp.user_id === "10" && !stamp.redeemed);
+    console.log(userStamps);
+    return userStamps;
+  }
 
   const onStampSubmitted = () => {
     stampCount += 1;
@@ -50,11 +53,7 @@ const StampCard = () => {
   return (
     <div className="stampcard">
       <div className="top-row">
-        {stamps.map((stamp) => (
-          <Stamp key={`stamp-${stamp.id}`} 
-          {...stamp}
-          passStampStatus={() => onStampSubmitted()}/>
-        ))}
+        {stampCount().length}
       </div>
       <div className="reward-button">
         { rewardActive ? (
