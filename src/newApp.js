@@ -1,5 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
+
+const useStamps = () => {
+  const [stamps, setStamps] = useState([]);
+
+  const fetchStamps = async () => {
+    const res = await fetch('https://reclaim-api.herokuapp.com/api/v1/stamps', {
+      method: 'GET',
+    });
+    const json = await res.json();
+
+    setStamps(json);
+  };
+
+  useEffect(() => fetchStamps(), []);
+
+  return [stamps];
+};
 
 const Stamp = ({ passStampStatus }) => {
   const [isStamped, setIsStamped] = useState(false)
@@ -21,8 +38,8 @@ const Stamp = ({ passStampStatus }) => {
 }
 
 const StampCard = () => {
-
   const [rewardActive, setRewardActive] = useState(false)
+  const [stamps] = useStamps();
 
   let stampCount = 0;
 
@@ -34,18 +51,11 @@ const StampCard = () => {
   return (
     <div className="stampcard">
       <div className="top-row">
-        <Stamp key="1" passStampStatus={() => onStampSubmitted()}/>
-        <Stamp key="2" passStampStatus={() => onStampSubmitted()}/>
-        <Stamp key="3" passStampStatus={() => onStampSubmitted()}/>
-        <Stamp key="4" passStampStatus={() => onStampSubmitted()}/>
-        <Stamp key="5" passStampStatus={() => onStampSubmitted()}/>
-      </div>
-      <div className="bottom-row">
-        <Stamp key="6" passStampStatus={() => onStampSubmitted()}/>
-        <Stamp key="7" passStampStatus={() => onStampSubmitted()}/>
-        <Stamp key="8" passStampStatus={() => onStampSubmitted()}/>
-        <Stamp key="9" passStampStatus={() => onStampSubmitted()}/>
-        <Stamp key="10" passStampStatus={() => onStampSubmitted()}/>
+        {stamps.map((stamp) => (
+          <Stamp key={`stamp-${stamp.id}`} 
+          {...stamp}
+          passStampStatus={() => onStampSubmitted()}/>
+        ))}
       </div>
       <div className="reward-button">
         { rewardActive ? (
