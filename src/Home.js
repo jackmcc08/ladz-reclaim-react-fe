@@ -18,14 +18,18 @@ class Home extends React.Component {
     super(props);
     this.state = {
       loggedIn: false,
-      userID: null
+      userID: null,
+      userName: null,
     };
+    this.handleLoginSubmit = this.handleLoginSubmit.bind(this)
+    this.handleSignupSubmit = this.handleSignupSubmit.bind(this)
   }
 
   handleLoginSubmit() {
     this.setState({
       loggedIn: true,
       userID: 8,
+      userName: "Ladz",
     });
     console.log("This has been clicked.")
   }
@@ -34,15 +38,41 @@ class Home extends React.Component {
     this.setState({
       loggedIn: false,
       userID: null,
+      userName: null,
     })
   }
 
   handleSignupSubmit() {
     this.setState({
-      loggedIn: false,
-      userID: null,
+      loggedIn: true,
+      userID: 8,
+      userName: "Ladz",
     })
   }
+  //
+
+  welcomeDisplay() {
+    if (this.state.loggedIn) {
+      return (
+        <div>
+          <h3>Hello {this.state.userName}</h3>
+          <br></br>
+          <Link to='/stamps'>Stamps</Link>
+          <br></br>
+          <LogoutButton onClick={() => this.handleLogoutSubmit()} />
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <Login onClick={this.handleLoginSubmit} />
+          <br></br>
+          <Link to='/signup'>Sign Up</Link>
+        </div>
+      )
+    }
+  }
+
 
   render() {
     return (
@@ -53,16 +83,10 @@ class Home extends React.Component {
         <main>
           <Switch>
             <Route exact path="/">
-              <Login onClick={() => this.handleLoginSubmit()} />
-              <br></br>
-              <Link to='/signup'>Sign Up</Link>
-              <br></br>
-              <Link to='/stamps'>Stamps</Link>
-              <br></br>
-              <LogoutButton onClick={() => this.handleLogoutSubmit()} />
+              {this.welcomeDisplay()}
             </Route>
             <Route exact path="/signup">
-              <Signup onClick={() => this.handleSignupSubmit()} />
+              <Signup onClick={this.handleSignupSubmit} />
             </Route>
             <Route exact path="/stamps">
               <App />

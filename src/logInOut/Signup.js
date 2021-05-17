@@ -25,9 +25,9 @@ class Signup extends Component {
         <h4>Signup</h4>
         <form onSubmit={event => {
           event.preventDefault();
-          this.redirectHome();
-          // reset of props does not work - need to look at binding as could be an issue
+          console.log(this.props.onClick)
           this.props.onClick();
+          console.log("Pressed signup")
           }}>
           <input
             placeholder="username"
