@@ -2,6 +2,8 @@ import React from 'react';
 import './App.css';
 import { createStamp, getCurrentNumStamps, patchRedeemedStamps } from './api/StampsApiInterface.js'
 
+const validationCodes = ['abcd', 'efgh', 'ijkl', 'mnop', 'qrst', 'uvwx', 'yz']
+
 function Stamp(props) {
   return (
     <button className="stamp" onClick={props.onClick}>
@@ -47,14 +49,63 @@ class StampCard extends React.Component {
   }
 }
 
+class StampValidate extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      inputValue: '',
+      stampIndex: this.props.index,
+    };
+  }
+
+  updateInputValue(evt) {
+    this.setState({
+      inputValue: evt.target.value
+    });
+  }
+
+  handleClick = () => {
+    this.props.toggle(null);
+  };
+
+  onSubmitCode = (e) => {
+    e.preventDefault();
+    if (validationCodes.includes(this.state.inputValue)) {
+      this.props.handleValidCode();
+    }
+  }
+
+  render() {
+    return (
+      <div className="modal">
+        <div className="modal_content">
+          <span className="close" onClick={this.handleClick}>
+            &times;
+          </span>
+          <form>
+            <h3>Enter your stamp code here!</h3>
+            <label>
+              Stamp Code:
+              <input type="text" value={this.state.inputValue} onChange={evt => this.updateInputValue(evt)}/>
+            </label>
+            <br />
+            <input type="submit" onClick={this.onSubmitCode}/>
+          </form>
+        </div>
+      </div>
+    );
+  }
+}
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {      
       numStamps: this.currentNumStamps(),
       stamps: this.getExistingStamps(),
-      displayReward: false,
       dataIsReturned: false,
+      displayReward: false,
+      stampCode: null,
     };
   }
 
@@ -88,6 +139,12 @@ class App extends React.Component {
     })
   }
 
+  toggleCode = (i) => {
+    this.setState({
+      stampCode: i
+    });
+  };
+
   previousStampIsStamped(i) {
     const stamps = this.state.stamps.slice();
     if (this.state.numStamps >= 10) {return true}
@@ -96,19 +153,31 @@ class App extends React.Component {
       return true}
   }
 
-  handleClick(i) {
+  updateStampCard() {
     const stamps = this.state.stamps.slice();
-    if (this.previousStampIsStamped(i)) {
-      return;
-    }
-    createStamp()
-    .then(() => {
-      this.currentNumStamps()
-      stamps[i] = '[X]'
+    this.currentNumStamps()
+      stamps[this.state.stampCode] = '[X]'
       this.setState({
         stamps: stamps,
       });
+  }
+
+  handleClick(i) {
+    if (this.previousStampIsStamped(i)) {
+      return;
+    }
+    this.toggleCode(i)
+  }
+
+  handleStampCodeClick() {
+    createStamp()
+    .then(() => {
+      this.updateStampCard()
     })
+    .then(() => {
+      this.toggleCode(null)
+    })
+    
   }
 
   handleRewardClick() {
@@ -150,6 +219,11 @@ class App extends React.Component {
               onClick={(i) => this.handleClick(i)}
             />
           </div>
+          {this.state.stampCode !== null ? 
+          <StampValidate 
+            toggle={this.toggleCode} 
+            handleValidCode={() => this.handleStampCodeClick()} /> 
+            : null}
           {button}
           {rewards}
           <StampCounter numStamps={this.state.numStamps}/>
