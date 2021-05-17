@@ -2,20 +2,77 @@ import React from 'react';
 import './App.css';
 import { createStamp, getCurrentNumStamps, patchRedeemedStamps } from './api/StampsApiInterface.js'
 
+function Stamp(props) {
+  return (
+    <button className="stamp" onClick={props.onClick}>
+      {props.value}
+    </button>  
+  )
+}
+
+class StampCard extends React.Component {
+  renderStamp(i) {
+    return(
+      <Stamp 
+        value={this.props.stamps[i]}
+        onClick ={() => this.props.onClick(i)}>         
+      </Stamp>
+    );
+  }
+
+  render() {
+    if (this.props.dataIsReturned) {
+    return (
+      <div>
+        <div className="card-row">
+          {this.renderStamp(0)}
+          {this.renderStamp(1)}
+          {this.renderStamp(2)}
+          {this.renderStamp(3)}
+          {this.renderStamp(4)}          
+        </div>
+        <div className="card-row">
+          {this.renderStamp(5)}
+          {this.renderStamp(6)}
+          {this.renderStamp(7)}
+          {this.renderStamp(8)}
+          {this.renderStamp(9)}          
+        </div>
+      </div>
+    ); } else {
+      return (
+        <h1>Loading</h1>
+      )
+    }
+  }
+}
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
+    this.state = {      
       numStamps: this.currentNumStamps(),
+      stamps: this.getExistingStamps(),
       displayReward: false,
-    }
+      dataIsReturned: false,
+    };
   }
 
   currentNumStamps() {
     getCurrentNumStamps().then((numStamps)=> {
       this.setState({
         numStamps: numStamps
+      })
+    })
+  }
+  
+  getExistingStamps() {
+    let baseStamps = Array(10).fill('[]')
+    getCurrentNumStamps().then((numStamps)=> {
+      var existingStamps = baseStamps.fill('[X]', 0, numStamps-1)
+      this.setState({
+        stamps: existingStamps,
+        dataIsReturned: true,
       })
     })
   }
@@ -30,10 +87,19 @@ class App extends React.Component {
     })
   }
 
-  handleClick() {
+  handleClick(i) {
+    const stamps = this.state.stamps.slice();
+    console.log(stamps);
+    if (this.state.numStamps >= 10 || stamps[i] === '[X]') {
+      return;
+    }
     createStamp()
     .then(() => {
       this.currentNumStamps()
+      stamps[i] = '[X]'
+      this.setState({
+        stamps: stamps,
+      });
     })
   }
 
@@ -61,8 +127,6 @@ class App extends React.Component {
       }} />;
     } else if (this.state.numStamps >= 10) {
       button = <ClaimReward onClick={() => this.handleRewardClick()} />;
-    } else {
-      button = <AddStamp onClick={() => this.handleClick()}/>;
     }
 
     return (
@@ -71,6 +135,13 @@ class App extends React.Component {
           <h1>RECLAIM!</h1>
         </header>
         <main className="App-body">
+          <div className="stamp-card">
+            <StampCard
+              stamps={this.state.stamps}
+              dataIsReturned ={this.state.dataIsReturned}
+              onClick={(i) => this.handleClick(i)}
+            />
+          </div>
           {button}
           {rewards}
           <StampCounter numStamps={this.state.numStamps}/>

@@ -2,8 +2,8 @@ import axios from 'axios';
 
 async function createStamp() {
   let newStamp = await axios.post('https://reclaim-api.herokuapp.com/api/v1/stamps', {
-    user_id: 8,
-    business_id: 8,
+    user_id: 10,
+    business_id: 10,
     redeemed: false,
   })
   return newStamp
@@ -21,7 +21,7 @@ async function getCurrentNumStamps() {
   .then((stampRecords) => {
     let stampCounter = 0;
     stampRecords.forEach(stamp => {
-      if (stamp.user_id === "8" && !stamp.redeemed) {
+      if (stamp.user_id === "10" && !stamp.redeemed) {
         stampCounter += 1;
       }
     });
@@ -35,7 +35,7 @@ async function patchRedeemedStamps() {
   .then(stampRecords => {
     let unredeemedStamps = [];
     stampRecords.forEach(stamp => {
-      if (stamp.user_id === "8" && !stamp.redeemed) {
+      if (stamp.user_id === "10" && !stamp.redeemed) {
         unredeemedStamps.push(stamp)
       }
     })
