@@ -22,6 +22,7 @@ class Home extends React.Component {
       userName: null,
     };
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this)
+    this.handleLogoutSubmit = this. handleLogoutSubmit.bind(this)
     this.handleSignupSubmit = this.handleSignupSubmit.bind(this)
   }
 
@@ -59,7 +60,7 @@ class Home extends React.Component {
           <br></br>
           <Link to='/stamps'>Stamps</Link>
           <br></br>
-          <LogoutButton onClick={() => this.handleLogoutSubmit()} />
+          <LogoutButton onClick={this.handleLogoutSubmit} />
         </div>
       )
     } else {
@@ -89,7 +90,7 @@ class Home extends React.Component {
               <Signup onClick={this.handleSignupSubmit} />
             </Route>
             <Route exact path="/stamps">
-              <App />
+              { this.state.loggedIn ? <App /> : <Redirect to="/" /> }
             </Route>
           </Switch>
         </main>

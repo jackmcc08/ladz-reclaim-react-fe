@@ -25,9 +25,8 @@ class Signup extends Component {
         <h4>Signup</h4>
         <form onSubmit={event => {
           event.preventDefault();
-          console.log(this.props.onClick)
           this.props.onClick();
-          console.log("Pressed signup")
+          this.redirectHome()
           }}>
           <input
             placeholder="username"
