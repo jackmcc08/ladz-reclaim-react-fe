@@ -1,17 +1,17 @@
-import React, { useContext, createContext, useState } from 'react';
+import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link,
-  Redirect,
-  useHistory,
-  useLocation
+  Redirect
 } from 'react-router-dom';
 import Login from './logInOut/Login.js';
-import Signup, { SignUpButton } from './logInOut/Signup.js';
+import Signup from './logInOut/Signup.js';
 import {LogoutButton} from './logInOut/Logout.js'
 import App from './App';
+// import { createBrowserHistory } from 'history';
+// let history = createBrowserHistory();
 
 class Home extends React.Component {
   constructor(props) {
@@ -22,7 +22,7 @@ class Home extends React.Component {
       userName: null,
     };
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this)
-    this.handleLogoutSubmit = this. handleLogoutSubmit.bind(this)
+    this.handleLogoutSubmit = this.handleLogoutSubmit.bind(this)
     this.handleSignupSubmit = this.handleSignupSubmit.bind(this)
   }
 
@@ -32,7 +32,7 @@ class Home extends React.Component {
       userID: 8,
       userName: "Ladz",
     });
-    console.log("This has been clicked.")
+    // console.log("This has been clicked.")
   }
 
   handleLogoutSubmit() {
@@ -48,7 +48,8 @@ class Home extends React.Component {
       loggedIn: true,
       userID: 8,
       userName: "Ladz",
-    })
+    });
+
   }
   //
 
@@ -86,7 +87,7 @@ class Home extends React.Component {
             <Route exact path="/">
               {this.welcomeDisplay()}
             </Route>
-            <Route exact path="/signup">
+            <Route exact path="/signup" >
               <Signup onClick={this.handleSignupSubmit} />
             </Route>
             <Route exact path="/stamps">

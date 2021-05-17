@@ -1,33 +1,28 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect
+  withRouter
 } from 'react-router-dom'
 
-class Signup extends Component {
+class Signup extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      test: false
+    }
   }
 
-  // redirect does not work!
-  redirectHome() {
-    return (
-      <Redirect to="/" />
-    )
+  // https://dev.to/projectescape/programmatic-navigation-in-react-3p1l - thanks to this blog for detailing the withRouter function and getting the redirect on form submission to work!
+  signupUser = (event) => {
+    event.preventDefault();
+    this.props.history.push('/');
+    this.props.onClick();
   }
 
   render() {
     return (
       <div>
         <h4>Signup</h4>
-        <form onSubmit={event => {
-          event.preventDefault();
-          this.props.onClick();
-          this.redirectHome()
-          }}>
+        <form onSubmit={ this.signupUser }>
           <input
             placeholder="username"
             type="text"
@@ -64,5 +59,5 @@ function SignupButton(props) {
 }
 
 
-export default Signup;
+export default withRouter(Signup);
 export { SignupButton };
