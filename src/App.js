@@ -69,7 +69,7 @@ class App extends React.Component {
   getExistingStamps() {
     let baseStamps = Array(10).fill('[]')
     getCurrentNumStamps().then((numStamps)=> {
-      var existingStamps = baseStamps.fill('[X]', 0, numStamps-1)
+      var existingStamps = baseStamps.fill('[X]', 0, numStamps)
       this.setState({
         stamps: existingStamps,
         dataIsReturned: true,
@@ -82,15 +82,23 @@ class App extends React.Component {
     .then(() => {
       this.setState({
         numStamps: 0,
+        stamps: Array(10).fill('[]'),
         displayReward: false,
       })
     })
   }
 
+  previousStampIsStamped(i) {
+    const stamps = this.state.stamps.slice();
+    if (this.state.numStamps >= 10) {return true}
+    else if (stamps[i] === '[X]') {return true}
+    else if (i !== 0 && stamps[i-1] !== '[X]') { 
+      return true}
+  }
+
   handleClick(i) {
     const stamps = this.state.stamps.slice();
-    console.log(stamps);
-    if (this.state.numStamps >= 10 || stamps[i] === '[X]') {
+    if (this.previousStampIsStamped(i)) {
       return;
     }
     createStamp()
