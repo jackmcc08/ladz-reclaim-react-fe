@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
-import { createStamp, getCurrentNumStamps, patchRedeemedStamps } from './api/StampsApiInterface.js'
+import { createStamp, getCurrentNumStamps, patchRedeemedStamps } from './api/StampsApiInterface.js';
+// import Login, { LoginButton, SignUpButton } from './Login.js';
 
 const validationCodes = ['abcd', 'efgh', 'ijkl', 'mnop', 'qrst', 'uvwx', 'yz']
 
@@ -208,9 +209,6 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <header className="App-header">
-          <h1>RECLAIM!</h1>
-        </header>
         <main className="App-body">
           <div className="stamp-card">
             <StampCard

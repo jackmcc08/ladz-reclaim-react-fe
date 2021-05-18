@@ -2,8 +2,9 @@ import axios from 'axios';
 
 async function createStamp() {
   let newStamp = await axios.post('https://reclaim-api.herokuapp.com/api/v1/stamps', {
-    user_id: 10,
-    business_id: 10,
+    user_id: 8,
+    // update to business_id: 1
+    business_id: 8,
     redeemed: false,
   })
   return newStamp
@@ -48,7 +49,10 @@ async function patchRedeemedStamps() {
       })
     });
   })
-  return result
+  return result // returns undefined
 }
 
 export { createStamp, getCurrentNumStamps, patchRedeemedStamps, getStampRecords };
+
+
+// axios.get('https://reclaim-api.herokuapp.com/api/v1/stamps').then((response) => {console.log(response.data)})
