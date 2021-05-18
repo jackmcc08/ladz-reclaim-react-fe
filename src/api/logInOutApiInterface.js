@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'http://localhost:3001'
+const url = `${process.env.REACT_APP_API_URL}`
 
 async function createUser(username, password) {
   let newUser = await axios.post(`${url}/api/v1/users`, { user: {
@@ -18,9 +18,17 @@ async function createSession(username, password) {
   return newSession
 }
 
+async function authenticateUser(username, password) {
+  let newSession = await axios.post(`${url}/api/v1/authenticate`, {
+    username: username,
+    password: password,
+  });
+  return newSession
+}
+
 async function destroySession() {
   let destroyedSession = await axios.get(`${url}/api/v1/logout`);
   return destroyedSession
 }
 
-export { createUser, createSession, destroySession};
+export { authenticateUser, createUser, createSession, destroySession};

@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+const url = `${process.env.REACT_APP_API_URL}`
+
 async function createStamp(userID) {
-  let newStamp = await axios.post('https://reclaim-api.herokuapp.com/api/v1/stamps', {
+  let newStamp = await axios.post(`${url}/api/v1/stamps`, {
     user_id: userID,
     // update to business_id: 1
     business_id: 8,
@@ -11,7 +13,7 @@ async function createStamp(userID) {
 }
 
 async function getStampRecords() {
-  let stampRecords = await axios.get('https://reclaim-api.herokuapp.com/api/v1/stamps').then(response => {
+  let stampRecords = await axios.get(`${url}/api/v1/stamps`).then(response => {
     return response.data
   })
   return stampRecords
@@ -44,7 +46,7 @@ async function patchRedeemedStamps(userID) {
   })
   .then(unredeemedStamps => {
     unredeemedStamps.forEach(stamp => {
-      axios.patch(`https://reclaim-api.herokuapp.com/api/v1/stamps/${stamp.id}`, {
+      axios.patch(`${url}/api/v1/stamps/${stamp.id}`, {
         redeemed: true,
       })
     });
@@ -55,4 +57,4 @@ async function patchRedeemedStamps(userID) {
 export { createStamp, getCurrentNumStamps, patchRedeemedStamps, getStampRecords };
 
 
-// axios.get('https://reclaim-api.herokuapp.com/api/v1/stamps').then((response) => {console.log(response.data)})
+// axios.get(`${url}/api/v1/stamps`).then((response) => {console.log(response.data)})
