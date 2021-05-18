@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-
-import {
-  createSession, authenticateUser
-} from '../api/logInOutApiInterface.js'
+import { authenticateUser } from '../api/logInOutApiInterface.js';
 
 class Login extends Component {
   constructor(props) {
@@ -24,11 +21,7 @@ class Login extends Component {
   handleLoginFormSubmit = (event) => {
     event.preventDefault();
     authenticateUser(this.state.username, this.state.password).then((response) => {
-      console.log(response)
-      console.log(response.data)
-      const token = response.data.auth_token;
-      localStorage.setItem('token', token);
-      // this.props.onClick(response.data)
+      this.props.onClick(response.data)
     })
   };
 

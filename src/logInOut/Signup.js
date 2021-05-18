@@ -4,7 +4,8 @@ import {
 } from 'react-router-dom'
 import {
   createUser,
-  createSession
+  createSession,
+  authenticateUser
 } from '../api/logInOutApiInterface.js'
 
 class Signup extends React.Component {
@@ -29,7 +30,7 @@ class Signup extends React.Component {
   handleSignupFormSubmit = (event) => {
     event.preventDefault();
     createUser(this.state.username, this.state.password).then((response) => {
-      createSession(this.state.username, this.state.password).then((response) => {
+      authenticateUser(this.state.username, this.state.password).then((response) => {
         this.props.onClick(response.data);
         this.props.history.push('/');
       })
