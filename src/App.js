@@ -130,7 +130,7 @@ class App extends React.Component {
   }
 
   redeemStamps() {
-    patchRedeemedStamps()
+    patchRedeemedStamps(this.props.userID)
     .then(() => {
       this.setState({
         numStamps: 0,

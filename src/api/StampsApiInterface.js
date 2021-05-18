@@ -31,12 +31,12 @@ async function getCurrentNumStamps(userID) {
   return numStamps
 }
 
-async function patchRedeemedStamps() {
+async function patchRedeemedStamps(userID) {
   let result = await getStampRecords()
   .then(stampRecords => {
     let unredeemedStamps = [];
     stampRecords.forEach(stamp => {
-      if (stamp.user_id === "8" && !stamp.redeemed) {
+      if (stamp.user_id === `${userID}` && !stamp.redeemed) {
         unredeemedStamps.push(stamp)
       }
     })

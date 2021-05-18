@@ -117,7 +117,7 @@ describe('#patchRedeemedStamps', () => {
 
     let result
     await act(async () => {
-      await patchRedeemedStamps().then(response => {
+      await patchRedeemedStamps(testUserID).then(response => {
         result = response
       })
     })
