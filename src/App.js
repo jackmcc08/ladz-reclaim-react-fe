@@ -171,7 +171,7 @@ class App extends React.Component {
   }
 
   handleStampCodeClick() {
-    createStamp()
+    createStamp(this.props.userID)
     .then(() => {
       this.updateStampCard()
     })

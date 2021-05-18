@@ -7,6 +7,9 @@ import axios from 'axios';
 import { createStamp, getCurrentNumStamps, patchRedeemedStamps, getStampRecords } from './StampsApiInterface.js';
 
 let container = null
+
+let testUserID = 8
+
 const fakeResponse = {
 "data": [
     {
@@ -59,7 +62,7 @@ describe('#createStamp', () => {
 
     let result
     await act(async () => {
-      await createStamp().then(response => {
+      await createStamp(testUserID).then(response => {
         result = response
       })
     })

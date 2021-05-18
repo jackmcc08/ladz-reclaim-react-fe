@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-async function createStamp() {
+async function createStamp(userID) {
   let newStamp = await axios.post('https://reclaim-api.herokuapp.com/api/v1/stamps', {
-    user_id: 8,
+    user_id: userID,
     // update to business_id: 1
     business_id: 8,
     redeemed: false,
