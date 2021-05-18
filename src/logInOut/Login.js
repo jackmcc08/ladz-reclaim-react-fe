@@ -1,49 +1,54 @@
 import React, { Component } from 'react';
 // import axios from 'axios'
 // import {Link} from 'react-router-dom'
+import {
+  createSession
+} from '../api/logInOutApiInterface.js'
 
 class Login extends Component {
-  // constructor(props) {
-  //   super(props);
-    // this.state = {
-    //   username: '',
-    //   password: '',
-    //   errors: ''
-    // };
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: '',
+      password: '',
+      errors: ''
+    };
+  }
 
-  // handleChange = (event) => {
-  //     const {name, value} = event.target
-  //     this.setState({
-  //       [name]: value
-  //     })
-  //   };
-  // //
-  // handleSubmit = (event) => {
-  //     event.preventDefault()
-  //   };
+  handleChange = (event) => {
+    const {name, value} = event.target
+    this.setState({
+      [name]: value
+    })
+  };
+
+  handleLoginFormSubmit = (event) => {
+    event.preventDefault();
+    createSession(this.state.username, this.state.password).then((response) => {
+      this.props.onClick(response.data)
+    })
+  };
 
   render() {
     return (
       <div>
         <h4>Log In</h4>
-        <form onSubmit={event => {
-          event.preventDefault();
-          this.props.onClick()
-          }}>
+        <form onSubmit={ this.handleLoginFormSubmit }>
           <input
             placeholder="username"
             type="text"
             name="username"
-            // value={username}
-            // onChange={this.handleChange}
+            value={this.state.username}
+            onChange={this.handleChange}
+            required
           />
           <input
             placeholder="password"
             type="password"
             name="password"
-            // value={password}
-            // onChange={this.handleChange}
+            value={this.state.password}
+            onChange={this.handleChange}
+            required
           />
           <button placeholder="submit" type="submit">
             Log In

@@ -26,11 +26,11 @@ class Home extends React.Component {
     this.handleSignupSubmit = this.handleSignupSubmit.bind(this)
   }
 
-  handleLoginSubmit() {
+  handleLoginSubmit(data) {
     this.setState({
       loggedIn: true,
-      userID: 8,
-      userName: "Ladz",
+      userID: data.user_id,
+      userName: data.user,
     });
     // console.log("This has been clicked.")
   }

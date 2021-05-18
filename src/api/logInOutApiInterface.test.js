@@ -107,3 +107,5 @@ describe('#destroySession', () => {
 //   username: 'jack2',
 //   password: 'Jack',
 // }}).then(response => console.log(response.data))
+//
+// axios.get(`${url}/api/v1/logout`).then(response => console.log(response.data))

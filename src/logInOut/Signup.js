@@ -26,11 +26,10 @@ class Signup extends React.Component {
       });
     }
   // https://dev.to/projectescape/programmatic-navigation-in-react-3p1l - thanks to this blog for detailing the withRouter function and getting the redirect on form submission to work!
-  signupUser = (event) => {
+  handleSignupFormSubmit = (event) => {
     event.preventDefault();
     createUser(this.state.username, this.state.password).then((response) => {
       createSession(this.state.username, this.state.password).then((response) => {
-        console.log(response.data)
         this.props.onClick(response.data);
         this.props.history.push('/');
       })
@@ -42,7 +41,7 @@ class Signup extends React.Component {
     return (
       <div>
         <h4>Signup</h4>
-        <form onSubmit={ this.signupUser }>
+        <form onSubmit={ this.handleSignupFormSubmit }>
           <input
             placeholder="username"
             type="text"
@@ -70,16 +69,16 @@ class Signup extends React.Component {
 
 
 
-function SignupButton(props) {
-  return (
-    <button
-      className="signUpButton"
-    >
-      Sign Up
-    </button>
-  )
-}
+// function SignupButton(props) {
+//   return (
+//     <button
+//       className="signUpButton"
+//     >
+//       Sign Up
+//     </button>
+//   )
+// }
 
 
 export default withRouter(Signup);
-export { SignupButton };
+// export { SignupButton };
