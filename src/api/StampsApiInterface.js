@@ -17,12 +17,12 @@ async function getStampRecords() {
   return stampRecords
 }
 
-async function getCurrentNumStamps() {
+async function getCurrentNumStamps(userID) {
   let numStamps = await getStampRecords()
   .then((stampRecords) => {
     let stampCounter = 0;
     stampRecords.forEach(stamp => {
-      if (stamp.user_id === "8" && !stamp.redeemed) {
+      if (stamp.user_id === `${userID}` && !stamp.redeemed) {
         stampCounter += 1;
       }
     });

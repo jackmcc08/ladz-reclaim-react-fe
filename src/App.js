@@ -111,7 +111,7 @@ class App extends React.Component {
   }
 
   currentNumStamps() {
-    getCurrentNumStamps().then((numStamps)=> {
+    getCurrentNumStamps(this.props.userID).then((numStamps)=> {
       this.setState({
         numStamps: numStamps
       })
@@ -120,7 +120,7 @@ class App extends React.Component {
 
   getExistingStamps() {
     let baseStamps = Array(10).fill('[]')
-    getCurrentNumStamps().then((numStamps)=> {
+    getCurrentNumStamps(this.props.userID).then((numStamps)=> {
       var existingStamps = baseStamps.fill('[X]', 0, numStamps)
       this.setState({
         stamps: existingStamps,

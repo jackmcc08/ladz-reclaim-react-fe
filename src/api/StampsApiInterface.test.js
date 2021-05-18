@@ -96,7 +96,7 @@ describe('#getCurrentNumStamps', () => {
 
     let result
     await act(async () => {
-      await getCurrentNumStamps().then(response => {
+      await getCurrentNumStamps(testUserID).then(response => {
         result = response
       })
     })
