@@ -9,16 +9,16 @@ function Stamp(props) {
   return (
     <button className="stamp" onClick={props.onClick}>
       {props.value}
-    </button>  
+    </button>
   )
 }
 
 class StampCard extends React.Component {
   renderStamp(i) {
     return(
-      <Stamp 
+      <Stamp
         value={this.props.stamps[i]}
-        onClick ={() => this.props.onClick(i)}>         
+        onClick ={() => this.props.onClick(i)}>
       </Stamp>
     );
   }
@@ -32,14 +32,14 @@ class StampCard extends React.Component {
           {this.renderStamp(1)}
           {this.renderStamp(2)}
           {this.renderStamp(3)}
-          {this.renderStamp(4)}          
+          {this.renderStamp(4)}
         </div>
         <div className="card-row">
           {this.renderStamp(5)}
           {this.renderStamp(6)}
           {this.renderStamp(7)}
           {this.renderStamp(8)}
-          {this.renderStamp(9)}          
+          {this.renderStamp(9)}
         </div>
       </div>
     ); } else {
@@ -101,7 +101,7 @@ class StampValidate extends React.Component {
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {      
+    this.state = {
       numStamps: this.currentNumStamps(),
       stamps: this.getExistingStamps(),
       dataIsReturned: false,
@@ -117,7 +117,7 @@ class App extends React.Component {
       })
     })
   }
-  
+
   getExistingStamps() {
     let baseStamps = Array(10).fill('[]')
     getCurrentNumStamps().then((numStamps)=> {
@@ -150,7 +150,7 @@ class App extends React.Component {
     const stamps = this.state.stamps.slice();
     if (this.state.numStamps >= 10) {return true}
     else if (stamps[i] === '[X]') {return true}
-    else if (i !== 0 && stamps[i-1] !== '[X]') { 
+    else if (i !== 0 && stamps[i-1] !== '[X]') {
       return true}
   }
 
@@ -178,7 +178,7 @@ class App extends React.Component {
     .then(() => {
       this.toggleCode(null)
     })
-    
+
   }
 
   handleRewardClick() {
@@ -217,10 +217,10 @@ class App extends React.Component {
               onClick={(i) => this.handleClick(i)}
             />
           </div>
-          {this.state.stampCode !== null ? 
-          <StampValidate 
-            toggle={this.toggleCode} 
-            handleValidCode={() => this.handleStampCodeClick()} /> 
+          {this.state.stampCode !== null ?
+          <StampValidate
+            toggle={this.toggleCode}
+            handleValidCode={() => this.handleStampCodeClick()} />
             : null}
           {button}
           {rewards}
