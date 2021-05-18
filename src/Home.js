@@ -43,11 +43,11 @@ class Home extends React.Component {
     })
   }
 
-  handleSignupSubmit() {
+  handleSignupSubmit(data) {
     this.setState({
       loggedIn: true,
-      userID: 8,
-      userName: "Ladz",
+      userID: data.user_id,
+      userName: data.user,
     });
 
   }
