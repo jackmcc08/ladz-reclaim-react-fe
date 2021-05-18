@@ -22,7 +22,7 @@ async function getCurrentNumStamps() {
   .then((stampRecords) => {
     let stampCounter = 0;
     stampRecords.forEach(stamp => {
-      if (stamp.user_id === "8" && !stamp.redeemed) {
+      if (stamp.user_id === "10" && !stamp.redeemed) {
         stampCounter += 1;
       }
     });
@@ -36,7 +36,7 @@ async function patchRedeemedStamps() {
   .then(stampRecords => {
     let unredeemedStamps = [];
     stampRecords.forEach(stamp => {
-      if (stamp.user_id === "8" && !stamp.redeemed) {
+      if (stamp.user_id === "10" && !stamp.redeemed) {
         unredeemedStamps.push(stamp)
       }
     })
