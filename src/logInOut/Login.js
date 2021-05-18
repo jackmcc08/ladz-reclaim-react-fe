@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-// import axios from 'axios'
-// import {Link} from 'react-router-dom'
+
 import {
   createSession
 } from '../api/logInOutApiInterface.js'
@@ -59,26 +58,4 @@ class Login extends Component {
   }
 }
 
-// function LoginButton(props) {
-//   return (
-//     <button
-//       className="loginButton"
-//     >
-//       Login
-//     </button>
-//   )
-// }
-
-
-
 export default Login;
-// export { LoginButton };
-
-
-// Click Login BUtton
-// displays form
-// Enter form username & password
-// Click Submit
-// Routes to Session creator
-// api pings back yes or no
-// Session created - now logged in

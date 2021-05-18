@@ -94,7 +94,7 @@ describe('#destroySession', () => {
   })
 })
 
-// actual API pings to test the axios return
+// actual API pings to test the axios return - do not delete, these can be tested to check what exactly the API is returing 
 //
 // const url = 'http://localhost:3001'
 //

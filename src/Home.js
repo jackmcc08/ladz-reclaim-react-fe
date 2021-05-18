@@ -10,8 +10,6 @@ import Login from './logInOut/Login.js';
 import Signup from './logInOut/Signup.js';
 import {LogoutButton} from './logInOut/Logout.js'
 import App from './App';
-// import { createBrowserHistory } from 'history';
-// let history = createBrowserHistory();
 
 class Home extends React.Component {
   constructor(props) {
@@ -32,7 +30,6 @@ class Home extends React.Component {
       userID: data.user_id,
       userName: data.user,
     });
-    // console.log("This has been clicked.")
   }
 
   handleLogoutSubmit() {
@@ -51,7 +48,6 @@ class Home extends React.Component {
     });
 
   }
-  //
 
   welcomeDisplay() {
     if (this.state.loggedIn) {

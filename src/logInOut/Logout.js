@@ -8,7 +8,7 @@ function LogoutButton(props) {
     <button
       className="loginButton"
       onClick={ () => {
-        destroySession();//.then((response) => console.log(response.data));
+        destroySession();
         props.onClick()
       }}
     >

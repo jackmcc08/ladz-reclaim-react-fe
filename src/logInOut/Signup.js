@@ -67,18 +67,4 @@ class Signup extends React.Component {
   }
 }
 
-
-
-// function SignupButton(props) {
-//   return (
-//     <button
-//       className="signUpButton"
-//     >
-//       Sign Up
-//     </button>
-//   )
-// }
-
-
 export default withRouter(Signup);
-// export { SignupButton };
