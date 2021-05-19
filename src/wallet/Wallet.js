@@ -1,3 +1,4 @@
+import { clippingParents } from '@popperjs/core';
 import React from 'react';
 import { getUserRewardRecords, getRewardRecords } from '../api/RewardsApiInterface.js';
 
@@ -22,18 +23,20 @@ class Wallet extends React.Component {
   }
 
   userRewardsContent(records) {
-    console.log(records)
+    console.log(records, 'records')
     const rewards = [];
-    records.forEach(record => {
+    var itemsProcessed = 0;
+    records.forEach((record, index, array) => {
       if (record.user_id === this.props.userID) {
       getRewardRecords(record.reward_id).then((reward) => {
         rewards.push(reward);
-        console.log(rewards, 'after each push')
-        }).then(() => {
+        itemsProcessed++;
+        if(itemsProcessed === array.length) {
           this.setState({
-            walletOpen: true,
             rewards: rewards,
-          })
+            walletOpen: true,
+          });
+        }
         })
       }
     })
@@ -61,21 +64,23 @@ class Wallet extends React.Component {
   }
 }
 
-function RewardCard(props) {
+export default Wallet;
+
+function OpenWallet(props) {
+  props.rewards.map((reward) => {console.log(reward)})
   return(
-    <div>
-      <h3>{props.record.id}</h3>
+    <div className="open-wallet"> 
+      {props.rewards.map((reward, i) => (
+        <RewardVoucher key={`reward-${i}`} reward_content={reward.reward_content} />
+      ))}
     </div>
   )
 }
 
-export default Wallet;
-
-function OpenWallet(props) {
-  console.log(props)
+function RewardVoucher(props) {
   return(
-    <div className="open-wallet">  
-        <h3>{props.reward_content}</h3>
+    <div className="reward-voucher">
+      <p>{props.reward_content}</p>
     </div>
   )
 }
