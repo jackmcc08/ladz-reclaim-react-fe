@@ -1,14 +1,7 @@
 import React from 'react';
 import './App.css';
 import { createStamp, getCurrentNumStamps, patchRedeemedStamps } from './api/StampsApiInterface.js';
-// import Login, { LoginButton, SignUpButton } from './Login.js';
-import {
-  // BrowserRouter as Router,
-  // Switch,
-  // Route,
-  Link,
-  // Redirect,
-} from 'react-router-dom';
+import {getRewardRecords} from './api/RewardsApiInterface.js'
 
 const validationCodes = ['abcd', 'efgh', 'ijkl', 'mnop', 'qrst', 'uvwx', 'yz']
 
@@ -113,6 +106,7 @@ class App extends React.Component {
       stamps: this.getExistingStamps(),
       dataIsReturned: false,
       displayReward: false,
+      reward: null,
       stampCode: null,
     };
   }
@@ -143,6 +137,7 @@ class App extends React.Component {
         numStamps: 0,
         stamps: Array(10).fill('[]'),
         displayReward: false,
+        reward: null
       })
     })
   }
@@ -189,8 +184,11 @@ class App extends React.Component {
   }
 
   handleRewardClick() {
-    this.setState({
-      displayReward: true
+    getRewardRecords(this.props.businessID).then((response) => {
+      this.setState({
+        displayReward: true,
+        reward: response.reward_content
+      })
     })
   }
 
@@ -212,7 +210,7 @@ class App extends React.Component {
 
     let rewards;
     if (this.state.displayReward) {
-      rewards = <RewardScreen businessID={this.props.businessID}/>
+      rewards = <RewardScreen businessID={this.props.businessID} reward={this.state.reward}/>
     }
 
     let button;
@@ -284,17 +282,17 @@ function UseReward(props) {
 }
 
 function RewardScreen(props) {
-  let reward;
-  if (props.businessID == 1) {
-    reward =  "Here's 10% off of some milk!"
-  } else if (props.businessID === 2) {
-    reward =  "Here's a 5% deluge of rouge for ya face!"
-  } else if (props.businessID === 3) {
-    reward =  "Here's a 15% discount of gains, brah!"
-  } else if (props.businessID === 3) {
-    reward =  "Have a free triple shot espresso"
-  }
-  return <h3>{reward}</h3>
+  // let reward;
+  // if (props.businessID == 1) {
+  //   reward =  "Here's 10% off of some milk!"
+  // } else if (props.businessID === 2) {
+  //   reward =  "Here's a 5% deluge of rouge for ya face!"
+  // } else if (props.businessID === 3) {
+  //   reward =  "Here's a 15% discount of gains, brah!"
+  // } else if (props.businessID === 3) {
+  //   reward =  "Have a free triple shot espresso"
+  // }
+  return <h3>{props.reward}</h3>
 }
 
 export default App;
