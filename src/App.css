@@ -14,14 +14,16 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #699e3c;
+  border-bottom: 12px solid #302718;
   min-height: 10vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #C7ab59;
+  text-shadow: -1px 0 #302718, 0 5px #302718, 1px 0 #302718, 0 -1px #302718;
 }
 
 .App-link {
@@ -35,4 +37,32 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+body {
+  background: linear-gradient(45deg, #699e3c 45px, transparent 45px)64px 64px,
+  linear-gradient(45deg, #699e3c 45px, transparent 45px,transparent 91px, #ded2a8 91px, #ded2a8 135px, transparent 135px),
+  linear-gradient(-45deg, #699e3c 23px, transparent 23px, transparent 68px,#699e3c 68px,#699e3c 113px,transparent 113px,transparent 158px,#699e3c 158px);
+  background-color:#ded2a8;
+  background-size: 128px 128px;
+  text-align: center;
+}
+
+.sign-up-link {
+  background-color: #699e3c;
+  border: 2px solid #302718;
+  color: #C7ab59;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.login-div {
+  background-color: #699e3c;
+  margin: auto;
+  width: 60%;
+  border: 3px solid #73AD21;
+  padding: 10px;
+  align-items: center;
 }
