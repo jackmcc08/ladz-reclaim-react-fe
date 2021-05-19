@@ -2,6 +2,13 @@ import React from 'react';
 import './App.css';
 import { createStamp, getCurrentNumStamps, patchRedeemedStamps } from './api/StampsApiInterface.js';
 // import Login, { LoginButton, SignUpButton } from './Login.js';
+import {
+  // BrowserRouter as Router,
+  // Switch,
+  // Route,
+  Link,
+  // Redirect,
+} from 'react-router-dom';
 
 const validationCodes = ['abcd', 'efgh', 'ijkl', 'mnop', 'qrst', 'uvwx', 'yz']
 
@@ -287,7 +294,6 @@ function RewardScreen(props) {
   } else if (props.businessID === 3) {
     reward =  "Have a free triple shot espresso"
   }
-
   return <h3>{reward}</h3>
 }
 
