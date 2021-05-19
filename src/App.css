@@ -1,33 +1,33 @@
 .App {
   text-align: center;
+  margin-left:auto;
+  margin-right:auto;
+  width:960px;
 }
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
-
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
 .App-header {
-  background-color: #282c34;
+  background-color: #699E3C;
+  border-bottom: 12px solid #302718;
   min-height: 10vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #C7AB59;
+  text-shadow: -1px 0 #302718, 0 5px #302718, 1px 0 #302718, 0 -1px #302718;
 }
-
 .App-link {
-  color: #61dafb;
+  color: #61DAFB;
 }
-
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -35,4 +35,78 @@
   to {
     transform: rotate(360deg);
   }
+}
+body {
+  background: linear-gradient(45deg, #699E3C 45px, transparent 45px)64px 64px,
+  linear-gradient(45deg, #699E3C 45px, transparent 45px,transparent 91px, #DED2A8 91px, #DED2A8 135px, transparent 135px),
+  linear-gradient(-45deg, #699E3C 23px, transparent 23px, transparent 68px,#699E3C 68px,#699E3C 113px,transparent 113px,transparent 158px,#699E3C 158px);
+  background-color:#ded2a8;
+  background-size: 128px 128px;
+  text-align: center;
+}
+.sign-up-link {
+  background-color: #699E3C;
+  border: 2px solid #302718;
+  color: #C7AB59;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+.login-div {
+  background-color: #699E3C;
+  margin: auto;
+  width: 60%;
+  border: 3px solid #73AD21;
+  padding: 10px;
+  align-items: center;
+}
+
+.App-body {
+  position:relative;
+  top:100px;
+  font-size: large;
+  color: #C7AB59;
+  text-shadow: 1px 0 #302718, 0 2px #302718, -1px 0 #302718, 0 0px #302718;
+}
+
+.stamp-card {
+  position: relative;
+  left: 290px;
+  bottom: 10px;
+  width: 25%;
+  height: 100px;
+  border: 2px solid #302718;
+  background-color:#C7AB59;
+}
+
+.card-row {
+  position: relative;
+  right: 10px;
+  bottom: 0px;
+  padding: 10px;
+  width: 100%;
+  height: 30px;
+}
+
+.stamp {
+  margin-left: 5px;
+  font-size: 10px;
+  width: 40px;
+  height: 30px;
+}
+
+#business {
+  position: relative;
+  right: 60px;
+}
+
+#stamp-counter {
+  position: relative;
+  right: 60px;
+}
+
+.claimReward {
+  position: relative;
+  right: 60px;
 }

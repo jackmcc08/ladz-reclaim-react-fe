@@ -221,7 +221,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <main className="App-body">
-          <h3>{businessName}</h3>
+          <h3 id="business">{businessName}</h3>
           <div className="stamp-card">
             <StampCard
               stamps={this.state.stamps}
@@ -253,7 +253,7 @@ function AddStamp(props) {
 
 function StampCounter(props) {
   return (
-    <h3>Stamps: {props.numStamps}</h3>
+    <h3 id="stamp-counter">Stamps: {props.numStamps}</h3>
   )
 }
 
