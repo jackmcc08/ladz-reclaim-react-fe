@@ -12,7 +12,7 @@ async function createStamp(userID) {
   }, {
     headers: {
       'Authorization': `token ${token}`
-    } 
+    }
   })
   return newStamp
 }
@@ -47,7 +47,7 @@ async function patchRedeemedStamps(userID) {
   .then(stampRecords => {
     let unredeemedStamps = [];
     stampRecords.forEach(stamp => {
-      if (stamp.user_id === `${userID}` && !stamp.redeemed) {
+      if (stamp.user_id == `${userID}` && !stamp.redeemed) {
         unredeemedStamps.push(stamp)
       }
     })
@@ -57,6 +57,11 @@ async function patchRedeemedStamps(userID) {
     unredeemedStamps.forEach(stamp => {
       axios.patch(`${url}/api/v1/stamps/${stamp.id}`, {
         redeemed: true,
+      },
+      {
+        headers: {
+          'Authorization': `token ${token}`
+        }
       })
     });
   })
