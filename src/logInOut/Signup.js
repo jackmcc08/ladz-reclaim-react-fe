@@ -4,7 +4,7 @@ import {
 } from 'react-router-dom'
 import {
   createUser,
-  createSession,
+  // createSession,
   authenticateUser
 } from '../api/logInOutApiInterface.js'
 
@@ -31,6 +31,8 @@ class Signup extends React.Component {
     event.preventDefault();
     createUser(this.state.username, this.state.password).then((response) => {
       authenticateUser(this.state.username, this.state.password).then((response) => {
+        const token = response.data.auth_token;
+        localStorage.setItem('token', token);
         this.props.onClick(response.data);
         this.props.history.push('/');
       })

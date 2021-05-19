@@ -10,25 +10,25 @@ async function createUser(username, password) {
   return newUser
 }
 
-async function createSession(username, password) {
-  let newSession = await axios.post(`${url}/api/v1/sessions`, { user: {
-    username: username,
-    password: password,
-  }});
-  return newSession
-}
+// async function createSession(username, password) {
+//   let newSession = await axios.post(`${url}/api/v1/sessions`, { user: {
+//     username: username,
+//     password: password,
+//   }});
+//   return newSession
+// }
 
 async function authenticateUser(username, password) {
-  let newSession = await axios.post(`${url}/api/v1/authenticate`, {
+  let newToken = await axios.post(`${url}/api/v1/authenticate`, {
     username: username,
     password: password,
   });
-  return newSession
+  return newToken
 }
 
-async function destroySession() {
-  let destroyedSession = await axios.get(`${url}/api/v1/logout`);
-  return destroyedSession
-}
+// async function destroySession() {
+//   let destroyedSession = await axios.get(`${url}/api/v1/logout`);
+//   return destroyedSession
+// }
 
-export { authenticateUser, createUser, createSession, destroySession};
+export { authenticateUser, createUser }; //, createSession, destroySession};

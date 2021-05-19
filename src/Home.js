@@ -45,7 +45,7 @@ class Home extends React.Component {
     this.setState({
       loggedIn: true,
       userID: data.user_id,
-      userName: data.user,
+      userName: data.username,
     });
 
   }
