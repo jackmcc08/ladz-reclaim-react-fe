@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { createStamp, getCurrentNumStamps, patchRedeemedStamps } from './api/StampsApiInterface.js';
-import {getRewardRecords} from './api/RewardsApiInterface.js'
+import {getRewardRecords, createUserRewardRecord} from './api/RewardsApiInterface.js'
 
 const validationCodes = ['abcd', 'efgh', 'ijkl', 'mnop', 'qrst', 'uvwx', 'yz']
 
@@ -187,13 +187,16 @@ class App extends React.Component {
     getRewardRecords(this.props.businessID).then((response) => {
       this.setState({
         displayReward: true,
-        reward: response.reward_content
+        reward: response
       })
     })
   }
 
   handleUseRewardClick() {
     this.redeemStamps()
+    createUserRewardRecord(this.props.userID, this.state.reward.id).then((response) => {
+      console.log(response)
+    })
   }
 
   render() {
@@ -282,17 +285,7 @@ function UseReward(props) {
 }
 
 function RewardScreen(props) {
-  // let reward;
-  // if (props.businessID == 1) {
-  //   reward =  "Here's 10% off of some milk!"
-  // } else if (props.businessID === 2) {
-  //   reward =  "Here's a 5% deluge of rouge for ya face!"
-  // } else if (props.businessID === 3) {
-  //   reward =  "Here's a 15% discount of gains, brah!"
-  // } else if (props.businessID === 3) {
-  //   reward =  "Have a free triple shot espresso"
-  // }
-  return <h3>{props.reward}</h3>
+  return <h3>{props.reward.reward_content}</h3>
 }
 
 export default App;

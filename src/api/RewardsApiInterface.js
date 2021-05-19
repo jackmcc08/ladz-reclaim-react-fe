@@ -9,17 +9,29 @@ async function getRewardRecords(businessID) {
       'Authorization': `token ${token}`
     }
   }).then(response => {
-    // console.log(response.data)
     let rewards = [];
     response.data.forEach(reward => {
       if (reward.business_id == `${businessID}`) {
         rewards.push(reward)
       }
     })
-    // console.log(rewards)
     return rewards[0]
   })
   return rewardRecords
 }
 
-export {getRewardRecords};
+async function createUserRewardRecord(userID, rewardID) {
+  let token = localStorage.getItem('token')
+  let newRewardRecord = await axios.post(`${url}/api/v1/user_rewards`, {
+    user_id: userID,
+    reward_id: rewardID,
+    redeemed: false,
+  }, {
+    headers: {
+        'Authorization': `token ${token}`
+    }
+  })
+  return newRewardRecord
+}
+
+export {getRewardRecords, createUserRewardRecord};
