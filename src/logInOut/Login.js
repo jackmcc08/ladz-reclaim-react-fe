@@ -21,6 +21,8 @@ class Login extends Component {
   handleLoginFormSubmit = (event) => {
     event.preventDefault();
     authenticateUser(this.state.username, this.state.password).then((response) => {
+      const token = response.data.auth_token;
+      localStorage.setItem('token', token);
       this.props.onClick(response.data)
     })
   };

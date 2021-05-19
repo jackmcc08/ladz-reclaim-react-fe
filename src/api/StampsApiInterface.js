@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const url = `${process.env.REACT_APP_API_URL}`
+const token = localStorage.getItem('token')
 
 async function createStamp(userID) {
   let newStamp = await axios.post(`${url}/api/v1/stamps`, {
@@ -8,12 +9,20 @@ async function createStamp(userID) {
     // update to business_id: 1
     business_id: 8,
     redeemed: false,
+  }, {
+    headers: {
+      'Authorization': `token ${token}`
+    } 
   })
   return newStamp
 }
 
 async function getStampRecords() {
-  let stampRecords = await axios.get(`${url}/api/v1/stamps`).then(response => {
+  let stampRecords = await axios.get(`${url}/api/v1/stamps`, {
+    headers: {
+      'Authorization': `token ${token}`
+    }
+  }).then(response => {
     return response.data
   })
   return stampRecords
@@ -24,7 +33,7 @@ async function getCurrentNumStamps(userID) {
   .then((stampRecords) => {
     let stampCounter = 0;
     stampRecords.forEach(stamp => {
-      if (stamp.user_id === `${userID}` && !stamp.redeemed) {
+      if (stamp.user_id == `${userID}` && !stamp.redeemed) {
         stampCounter += 1;
       }
     });
