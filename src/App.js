@@ -27,6 +27,7 @@ class StampCard extends React.Component {
     if (this.props.dataIsReturned) {
     return (
       <div>
+        <h3> Business one </h3>
         <div className="card-row">
           {this.renderStamp(0)}
           {this.renderStamp(1)}

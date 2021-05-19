@@ -4,7 +4,7 @@ import {
   Switch,
   Route,
   Link,
-  Redirect
+  Redirect,
 } from 'react-router-dom';
 import Login from './logInOut/Login.js';
 import Signup from './logInOut/Signup.js';
@@ -28,8 +28,9 @@ class Home extends React.Component {
     this.setState({
       loggedIn: true,
       userID: data.user_id,
-      userName: data.user,
+      userName: data.username,
     });
+
   }
 
   handleLogoutSubmit() {
@@ -44,7 +45,7 @@ class Home extends React.Component {
     this.setState({
       loggedIn: true,
       userID: data.user_id,
-      userName: data.user,
+      userName: data.username,
     });
 
   }
