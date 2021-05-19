@@ -90,7 +90,7 @@ class StampValidate extends React.Component {
               <input type="text" value={this.state.inputValue} onChange={evt => this.updateInputValue(evt)}/>
             </label>
             <br />
-            <input type="submit" onClick={this.onSubmitCode}/>
+            <input  id="submit-button" type="submit" onClick={this.onSubmitCode}/>
           </form>
         </div>
       </div>
@@ -278,7 +278,7 @@ function UseReward(props) {
 
 function RewardScreen(props) {
   return(
-    <h1>
+    <h1 id="milk-offer">
       Here's 10% off of some milk!
     </h1>
   )
