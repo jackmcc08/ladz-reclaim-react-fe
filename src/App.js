@@ -27,7 +27,6 @@ class StampCard extends React.Component {
     if (this.props.dataIsReturned) {
     return (
       <div>
-        <h3> Business one </h3>
         <div className="card-row">
           {this.renderStamp(0)}
           {this.renderStamp(1)}
@@ -112,7 +111,7 @@ class App extends React.Component {
   }
 
   currentNumStamps() {
-    getCurrentNumStamps(this.props.userID).then((numStamps)=> {
+    getCurrentNumStamps(this.props.userID, this.props.businessID).then((numStamps)=> {
       this.setState({
         numStamps: numStamps
       })
@@ -121,7 +120,7 @@ class App extends React.Component {
 
   getExistingStamps() {
     let baseStamps = Array(10).fill('[]')
-    getCurrentNumStamps(this.props.userID).then((numStamps)=> {
+    getCurrentNumStamps(this.props.userID, this.props.businessID).then((numStamps)=> {
       var existingStamps = baseStamps.fill('[X]', 0, numStamps)
       this.setState({
         stamps: existingStamps,
@@ -131,7 +130,7 @@ class App extends React.Component {
   }
 
   redeemStamps() {
-    patchRedeemedStamps(this.props.userID)
+    patchRedeemedStamps(this.props.userID, this.props.businessID)
     .then(() => {
       this.setState({
         numStamps: 0,
@@ -172,7 +171,7 @@ class App extends React.Component {
   }
 
   handleStampCodeClick() {
-    createStamp(this.props.userID)
+    createStamp(this.props.userID, this.props.businessID)
     .then(() => {
       this.updateStampCard()
     })
@@ -193,6 +192,17 @@ class App extends React.Component {
   }
 
   render() {
+    let businessName;
+    if (this.props.businessID === 1) {
+      businessName = 'That Milk Man Guy'
+    } else if ((this.props.businessID === 2)) {
+      businessName = 'Blush' 
+    } else if ((this.props.businessID === 3)) {
+      businessName = 'SwollFoods'
+    } else if ((this.props.businessID === 4)) {
+      businessName = 'Craigs Coffee and other such innocent business activities'
+    }
+
     let rewards;
     if (this.state.displayReward) {
       rewards = <RewardScreen />
@@ -211,6 +221,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <main className="App-body">
+          <h3>{businessName}</h3>
           <div className="stamp-card">
             <StampCard
               stamps={this.state.stamps}

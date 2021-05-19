@@ -3,11 +3,11 @@ import axios from 'axios';
 const url = `${process.env.REACT_APP_API_URL}`
 const token = localStorage.getItem('token')
 
-async function createStamp(userID) {
+async function createStamp(userID, businessID) {
   let newStamp = await axios.post(`${url}/api/v1/stamps`, {
     user_id: userID,
     // update to business_id: 1
-    business_id: 8,
+    business_id: businessID,
     redeemed: false,
   }, {
     headers: {
@@ -28,12 +28,12 @@ async function getStampRecords() {
   return stampRecords
 }
 
-async function getCurrentNumStamps(userID) {
+async function getCurrentNumStamps(userID, businessID) {
   let numStamps = await getStampRecords()
   .then((stampRecords) => {
     let stampCounter = 0;
     stampRecords.forEach(stamp => {
-      if (stamp.user_id == `${userID}` && !stamp.redeemed) {
+      if (stamp.user_id === userID && stamp.business_id === businessID && !stamp.redeemed) {
         stampCounter += 1;
       }
     });
@@ -42,12 +42,12 @@ async function getCurrentNumStamps(userID) {
   return numStamps
 }
 
-async function patchRedeemedStamps(userID) {
+async function patchRedeemedStamps(userID, businessID) {
   let result = await getStampRecords()
   .then(stampRecords => {
     let unredeemedStamps = [];
     stampRecords.forEach(stamp => {
-      if (stamp.user_id == `${userID}` && !stamp.redeemed) {
+      if (stamp.user_id === userID && stamp.business_id === businessID && !stamp.redeemed) {
         unredeemedStamps.push(stamp)
       }
     })

@@ -88,7 +88,8 @@ class Home extends React.Component {
               <Signup onClick={this.handleSignupSubmit} />
             </Route>
             <Route exact path="/stamps">
-              { this.state.loggedIn ? <App userID={this.state.userID} /> : <Redirect to="/" /> }
+              { this.state.loggedIn ? <App userID={this.state.userID} businessID={1} /> : <Redirect to="/" /> }
+              { this.state.loggedIn ? <App userID={this.state.userID} businessID={2} /> : <Redirect to="/" /> }
             </Route>
           </Switch>
         </main>
