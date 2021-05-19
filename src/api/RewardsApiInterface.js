@@ -20,11 +20,11 @@ async function getRewardRecords(businessID) {
   return rewardRecords
 }
 
-async function createUserRewardRecord(userID, rewardID) {
+async function createUserRewardRecord(userID, businessID) {
   let token = localStorage.getItem('token')
   let newRewardRecord = await axios.post(`${url}/api/v1/user_rewards`, {
     user_id: userID,
-    reward_id: rewardID,
+    reward_id: businessID,
     redeemed: false,
   }, {
     headers: {
@@ -49,7 +49,6 @@ async function getUserRewardRecords(userID) {
     })
     return userRewards;
   })
-  // console.log(userRewardRecords);
   return userRewardRecords;
 }
 

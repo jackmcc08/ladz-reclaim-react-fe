@@ -1,31 +1,61 @@
 import React from 'react';
-import { getUserRewardRecords } from '../api/RewardsApiInterface.js';
+import { getUserRewardRecords, getRewardRecords } from '../api/RewardsApiInterface.js';
 
 class Wallet extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      records: getUserRewardRecords(this.props.userID),
+      records: this.userRewards(),
+      rewards: [],
+      walletOpen: false,
     };
   }
 
+
+
   userRewards() {
-    getUserRewardRecords(this.props.userID).then((response) => {
-      console.log(response)
-      response.forEach(record => {
-        console.log(record)
-        // <RewardCard reward={record} />
+    getUserRewardRecords(this.props.userID).then((records) => {
+      this.setState({
+        records: records
       })
     })
+  }
 
-    // for (let i = 0, i == this.state.records, i++)
+  userRewardsContent(records) {
+    console.log(records)
+    const rewards = [];
+    records.forEach(record => {
+      if (record.user_id === this.props.userID) {
+      getRewardRecords(record.reward_id).then((reward) => {
+        rewards.push(reward);
+        console.log(rewards, 'after each push')
+        }).then(() => {
+          this.setState({
+            walletOpen: true,
+            rewards: rewards,
+          })
+        })
+      }
+    })
+  }
+
+  handleOpenWalletClick() {
+    this.userRewardsContent(this.state.records)
   }
 
   render() {
+
+    const walletOpen = this.state.walletOpen;
+    let wallet;
+    if (walletOpen) {
+      wallet = <OpenWallet rewards={this.state.rewards}/>;
+    } else {
+      wallet = <button onClick={() => this.handleOpenWalletClick()}></button>
+    }
     return (
       <div>
         <h3>{this.props.username}'s Wallet</h3>
-        {this.userRewards()}
+        {wallet}
       </div>
     )
   }
@@ -40,3 +70,12 @@ function RewardCard(props) {
 }
 
 export default Wallet;
+
+function OpenWallet(props) {
+  console.log(props)
+  return(
+    <div className="open-wallet">  
+        <h3>{props.reward_content}</h3>
+    </div>
+  )
+}

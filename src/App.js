@@ -192,11 +192,9 @@ class App extends React.Component {
     })
   }
 
-  handleUseRewardClick() {
+  handleClaimRewardClick() {
     this.redeemStamps()
-    createUserRewardRecord(this.props.userID, this.state.reward.id).then((response) => {
-      console.log(response)
-    })
+    createUserRewardRecord(this.props.userID, this.state.reward.business_id)
   }
 
   render() {
@@ -220,7 +218,7 @@ class App extends React.Component {
     if (this.state.displayReward) {
       button = <UseReward onClick={(event) => {
         event.preventDefault();
-        this.handleUseRewardClick()
+        this.handleClaimRewardClick()
       }} />;
     } else if (this.state.numStamps >= 10) {
       button = <ClaimReward onClick={() => this.handleRewardClick()} />;
