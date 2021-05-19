@@ -14,7 +14,7 @@ class Wallet extends React.Component {
       console.log(response)
       response.forEach(record => {
         console.log(record)
-        <RewardCard reward={record} />
+        // <RewardCard reward={record} />
       })
     })
 
