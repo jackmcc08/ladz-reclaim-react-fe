@@ -205,7 +205,7 @@ class App extends React.Component {
 
     let rewards;
     if (this.state.displayReward) {
-      rewards = <RewardScreen />
+      rewards = <RewardScreen businessID={this.props.businessID}/>
     }
 
     let button;
@@ -276,12 +276,19 @@ function UseReward(props) {
   )
 }
 
-function RewardScreen(props) {
-  return(
-    <h1>
-      Here's 10% off of some milk!
-    </h1>
-  )
+function RewardScreen(businessID) {
+  // console.log(businessID, 'bus id')
+  // if (businessID == 1) {
+  //   console.log('it registered business Id of 1')
+  //   return <h1>Here's 10% off of some milk!</h1>
+  // } else if (businessID === 2) {
+  //   return <h1>Here's a 5% deluge of rouge for ya face!</h1>
+  // } else if (businessID === 3) {
+  //   return <h1>Here's a 15% discount of gains, brah!</h1>
+  // } else if (businessID === 3) {
+  //   return <h1>Have a free triple shot espresso</h1>
+  // } 
+  return <h1>bloop</h1>
 }
 
 export default App;
