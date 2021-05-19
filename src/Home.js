@@ -10,6 +10,7 @@ import Login from './logInOut/Login.js';
 import Signup from './logInOut/Signup.js';
 import {LogoutButton} from './logInOut/Logout.js'
 import App from './App';
+import Wallet from './wallet/Wallet.js'
 
 class Home extends React.Component {
   constructor(props) {
@@ -58,6 +59,8 @@ class Home extends React.Component {
           <br></br>
           <Link to='/stamps'>Stamps</Link>
           <br></br>
+          <Link to='/wallet'>Wallet</Link>
+          <br></br>
           <LogoutButton onClick={this.handleLogoutSubmit} />
         </div>
       )
@@ -90,6 +93,10 @@ class Home extends React.Component {
             <Route exact path="/stamps">
               { this.state.loggedIn ? <App userID={this.state.userID} businessID={1} /> : <Redirect to="/" /> }
               { this.state.loggedIn ? <App userID={this.state.userID} businessID={2} /> : <Redirect to="/" /> }
+              <Link to='/'>Home</Link>
+            </Route>
+            <Route exact path="/wallet">
+              { this.state.loggedIn ? <Wallet userID={this.state.userID} username={this.state.userName} /> : <Redirect to="/" /> }
               <Link to='/'>Home</Link>
             </Route>
           </Switch>
