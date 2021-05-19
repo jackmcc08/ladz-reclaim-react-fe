@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { createStamp, getCurrentNumStamps, patchRedeemedStamps } from './api/StampsApiInterface.js';
-// import Login, { LoginButton, SignUpButton } from './Login.js';
+import {getRewardRecords, createUserRewardRecord} from './api/RewardsApiInterface.js'
 
 const validationCodes = ['abcd', 'efgh', 'ijkl', 'mnop', 'qrst', 'uvwx', 'yz']
 
@@ -106,6 +106,7 @@ class App extends React.Component {
       stamps: this.getExistingStamps(),
       dataIsReturned: false,
       displayReward: false,
+      reward: null,
       stampCode: null,
     };
   }
@@ -136,6 +137,7 @@ class App extends React.Component {
         numStamps: 0,
         stamps: Array(10).fill('[]'),
         displayReward: false,
+        reward: null
       })
     })
   }
@@ -182,13 +184,19 @@ class App extends React.Component {
   }
 
   handleRewardClick() {
-    this.setState({
-      displayReward: true
+    getRewardRecords(this.props.businessID).then((response) => {
+      this.setState({
+        displayReward: true,
+        reward: response
+      })
     })
   }
 
   handleUseRewardClick() {
     this.redeemStamps()
+    createUserRewardRecord(this.props.userID, this.state.reward.id).then((response) => {
+      console.log(response)
+    })
   }
 
   render() {
@@ -196,7 +204,7 @@ class App extends React.Component {
     if (this.props.businessID === 1) {
       businessName = 'That Milk Man Guy'
     } else if ((this.props.businessID === 2)) {
-      businessName = 'Blush' 
+      businessName = 'Blush'
     } else if ((this.props.businessID === 3)) {
       businessName = 'SwollFoods'
     } else if ((this.props.businessID === 4)) {
@@ -205,7 +213,7 @@ class App extends React.Component {
 
     let rewards;
     if (this.state.displayReward) {
-      rewards = <RewardScreen />
+      rewards = <RewardScreen businessID={this.props.businessID} reward={this.state.reward}/>
     }
 
     let button;
@@ -277,11 +285,7 @@ function UseReward(props) {
 }
 
 function RewardScreen(props) {
-  return(
-    <h1>
-      Here's 10% off of some milk!
-    </h1>
-  )
+  return <h3>{props.reward.reward_content}</h3>
 }
 
 export default App;
