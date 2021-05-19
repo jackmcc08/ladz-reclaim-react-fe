@@ -63,10 +63,10 @@ class Home extends React.Component {
       )
     } else {
       return (
-        <div>
+        <div className="login-div">
           <Login onClick={this.handleLoginSubmit} />
           <br></br>
-          <Link to='/signup'>Sign Up</Link>
+          <Link className="sign-up-link" to='/signup'>Sign Up</Link>
         </div>
       )
     }

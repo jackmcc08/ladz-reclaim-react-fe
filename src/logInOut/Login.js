@@ -30,9 +30,10 @@ class Login extends Component {
   render() {
     return (
       <div>
-        <h4>Log In</h4>
+        <h4 className="login-title">Welcome</h4>
         <form onSubmit={ this.handleLoginFormSubmit }>
           <input
+            className="login-form"
             placeholder="username"
             type="text"
             name="username"
@@ -40,7 +41,9 @@ class Login extends Component {
             onChange={this.handleChange}
             required
           />
+          <br></br>
           <input
+            className="login-form"
             placeholder="password"
             type="password"
             name="password"
@@ -48,7 +51,8 @@ class Login extends Component {
             onChange={this.handleChange}
             required
           />
-          <button placeholder="submit" type="submit">
+          <br></br>
+          <button className="login-button" placeholder="submit" type="submit">
             Log In
           </button>
         </form>
