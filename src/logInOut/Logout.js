@@ -6,7 +6,7 @@ import React from 'react';
 function LogoutButton(props) {
   return (
     <button
-      className="loginButton"
+      className="login-button"
       onClick={ () => {
         // destroySession();
         destroyToken();
