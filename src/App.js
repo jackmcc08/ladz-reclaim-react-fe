@@ -85,7 +85,7 @@ class StampValidate extends React.Component {
           </span>
           <form>
             <h3>Enter your stamp code here!</h3>
-            <label>
+            <label id="stamp-code">
               Stamp Code:
               <input type="text" value={this.state.inputValue} onChange={evt => this.updateInputValue(evt)}/>
             </label>
