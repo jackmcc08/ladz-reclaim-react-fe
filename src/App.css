@@ -177,16 +177,6 @@ body {
   height: 30px;
 }
 
-.stamp:active {
-  background-color: #301b18;
-}
-.stamp:focus {
-  background-color: #302718;
-}
-:target {
-  background-color: #302718;
-}
-
 #business {
   position: relative;
   top: 100px;
