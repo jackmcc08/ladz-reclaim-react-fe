@@ -1,0 +1,7 @@
+.wallet-container {
+  position:relative;
+  top:100px;
+  font-size: large;
+  color: #C7AB59;
+  text-shadow: 1px 0 #302718, 0 2px #302718, -1px 0 #302718, 0 0px #302718;
+}

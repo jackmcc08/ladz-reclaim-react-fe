@@ -60,8 +60,8 @@ class Wallet extends React.Component {
       wallet = <img src={this.state.wallet} onClick={() => this.handleOpenWalletClick()}></img>
     }
     return (
-      <div>
-        <h3>{this.props.username}'s Wallet</h3>
+      <div className="login-div">
+        <h3 className="login-title">{this.props.username}'s Wallet</h3>
         {wallet}
       </div>
     )
@@ -92,7 +92,7 @@ const RewardVoucher = ({ id, reward_content, redeemed }) => {
   }
 
   return (
-    <div className="reward-voucher">
+    <div className="stamp-card">
       {showReward ? (
         <div className="active-voucher">
           <p>{reward_content}</p>
