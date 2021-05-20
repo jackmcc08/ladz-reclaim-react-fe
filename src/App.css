@@ -235,6 +235,17 @@ body {
   transition: 0.5s;
 }
 
+.wallet-container {
+  background-color: #699e3c;
+  margin: auto;
+  width: 60%;
+  border: 1px solid #302718;
+  padding: 10px;
+  align-items: center;
+  margin-top: 3%;
+  border-radius: 5px;
+}
+
 .voucher-container {
   position: relative;
   left: 290px;
