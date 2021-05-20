@@ -43,6 +43,9 @@ body {
   linear-gradient(-45deg, #699E3C 23px, transparent 23px, transparent 68px,#699E3C 68px,#699E3C 113px,transparent 113px,transparent 158px,#699E3C 158px);
   background-color:#ded2a8;
   background-size: 128px 128px;
+}
+
+main {
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -101,6 +104,7 @@ body {
   color: #C7ab59;
   font-size: calc(10px + 2vmin);
   text-shadow: -1px 0 #302718, 0 2px #302718, 1px 0 #302718, 0 -1px #302718;
+  margin-bottom: 5px;
 }
 
 .login-form {
@@ -152,17 +156,18 @@ body {
   border: 1px solid #302718;
   padding: 10px;
   align-items: center;
-  margin-top: 10%;
+  /* margin-top: 10%; */
   border-radius: 5px;
 }
 
 .card-row {
   position: relative;
-  right: 10px;
+  /* right: 10px; */
   bottom: 0px;
   padding: 10px;
   width: 100%;
   height: 30px;
+  margin-bottom: 10px;
 }
 
 .stamp {
@@ -170,16 +175,22 @@ body {
   color: #699e3c;
   position: relative;
   right: 3%;
-  margin-left: 25px;
-  margin-top: 25px;
-  font-size: 18px;
-  width: 40px;
-  height: 30px;
+  margin-left: 10px;
+  margin-top: 10px;
+  font-size: 30px;
+  width: 50px;
+  height: 50px;
 }
+
+.stamp:hover {
+  background-color: #302718;
+  transition: 0.5s;
+}
+
 
 #business {
   position: relative;
-  top: 100px;
+  /* top: 100px; */
   color: #302718;
   font-size: calc(10px + 2vmin);
   text-shadow: -1px 0 #ffffff, 0 1px #ffffff, 1px 0 #ffffff, 0 -1px #ffffff;
@@ -203,7 +214,7 @@ body {
   font-size: calc(10px + 2vmin);
   color: #C7ab59;
   text-shadow: -1px 0 #302718, 0 3px #302718, 3px 0 #302718, 0 -1px #302718;
- 
+
 }
 
 #stamp-code {
@@ -240,7 +251,7 @@ body {
     60%{    color: #ffffff; }
     99%{    color: #ffff;  }
     100%{   color: #000;    }
-    
+
 }
 
 .close {
@@ -248,4 +259,21 @@ body {
   font-size: calc(20px + 2vmin);
   text-shadow: -1px 0 #302718, 0 2px #302718, 1px 0 #302718, 0 -1px #302718;
   border: none;
+}
+
+.homeLink {
+  margin: 20px 0;
+  font-size: calc(10px + 2vmin);
+  color: #C7ab59;
+  text-shadow: -1px 0 #302718, 0 3px #302718, 3px 0 #302718, 0 -1px #302718;
+}
+
+.homeLink:hover {
+  color: #302718;
+  transition: 0.5s;
+}
+
+.homeLink:active{
+  color: #302718;
+  transition: 0.5s;
 }

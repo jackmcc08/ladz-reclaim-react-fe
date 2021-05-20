@@ -55,7 +55,6 @@ class Home extends React.Component {
       return (
         <div className="login-div">
           <h3 className="login-title">Hello {this.state.userName}</h3>
-          <br></br>
           <Link className="sign-up-link" to='/stamps'>Stamps</Link>
           <br></br>
           <LogoutButton onClick={this.handleLogoutSubmit} />
@@ -90,7 +89,7 @@ class Home extends React.Component {
             <Route exact path="/stamps">
               { this.state.loggedIn ? <App userID={this.state.userID} businessID={1} /> : <Redirect to="/" /> }
               { this.state.loggedIn ? <App userID={this.state.userID} businessID={2} /> : <Redirect to="/" /> }
-              <Link to='/'>Home</Link>
+              <Link className="homeLink" to='/'>Home</Link>
             </Route>
           </Switch>
         </main>

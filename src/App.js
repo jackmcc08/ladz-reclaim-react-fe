@@ -228,7 +228,7 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <main className="App-body">
+        <div className="App-body">
           <h3 id="business">{businessName}</h3>
           <div className="stamp-card">
             <StampCard
@@ -245,7 +245,7 @@ class App extends React.Component {
           {button}
           {rewards}
           <StampCounter numStamps={this.state.numStamps}/>
-        </main>
+        </div>
       </div>
     );
   }
