@@ -72,10 +72,10 @@ export default Wallet;
 
 function OpenWallet(props) {
   return(
-    <div> 
+    <div  className="walletRewardsDiv">
       {props.rewards.map((reward) => (
-        <RewardVoucher 
-          key={`reward-${reward.id}`} 
+        <RewardVoucher
+          key={`reward-${reward.id}`}
           {...reward}
           />
       ))}
@@ -100,7 +100,7 @@ const RewardVoucher = ({ id, reward_content, redeemed }) => {
         </div>
       ) : (
         <p style={{textDecoration: 'line-through'}}>{reward_content}</p>
-      )}      
+      )}
     </div>
   )
 }

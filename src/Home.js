@@ -90,13 +90,15 @@ class Home extends React.Component {
               <Signup onClick={this.handleSignupSubmit} />
             </Route>
             <Route exact path="/stamps">
+              <Link className="homeLink" to='/'>Home</Link>
               { this.state.loggedIn ? <App userID={this.state.userID} businessID={1} /> : <Redirect to="/" /> }
               { this.state.loggedIn ? <App userID={this.state.userID} businessID={2} /> : <Redirect to="/" /> }
-              <Link className="homeLink" to='/'>Home</Link>
+
             </Route>
             <Route exact path="/wallet">
               <Link className="login-title" to='/'>Home</Link>
               { this.state.loggedIn ? <Wallet userID={this.state.userID} username={this.state.userName} /> : <Redirect to="/" /> }
+
             </Route>
           </Switch>
         </main>
