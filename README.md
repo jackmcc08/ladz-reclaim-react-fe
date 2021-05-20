@@ -1,3 +1,39 @@
+# Reclaim
+## A React.js frontend application
+## Makers Academy Final Project - Team LADZ
+
+## Summary
+
+The Reclaim web application is a loyalty card application that rewards users for recycling pacakging and promotes small businesses.
+
+The app is comprised of two independent programs - a front end react web app and a backend ruby on rails API.
+
+The development team:
+- Will Spencer
+- Jack Hooper
+- Alec Yates
+- Jack McCarthy
+
+## To Use
+
+#### Development Mode
+- git clone to your local machine
+- run `npm install` to install dependencies
+- in the root folder of the project create a `.env.local` file and add the following:`REACT_APP_API_URL="https://reclaim-api.herokuapp.com"`
+- `yarn start` - starts app in browser
+  - Open [http://localhost:3000](http://localhost:3000) to view it in the browser. The page will reload if you make edits. You will also see any lint errors in the console.
+- `yarn test-coverage` - runs tests and gives coverage
+
+## Solution
+
+
+## Features
+
+
+
+
+# React auto generated Readme instructions:
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
