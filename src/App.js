@@ -120,9 +120,9 @@ class App extends React.Component {
   }
 
   getExistingStamps() {
-    let baseStamps = Array(10).fill('[]')
+    let baseStamps = Array(10).fill('⠀')
     getCurrentNumStamps(this.props.userID, this.props.businessID).then((numStamps)=> {
-      var existingStamps = baseStamps.fill('[X]', 0, numStamps)
+      var existingStamps = baseStamps.fill('♻', 0, numStamps)
       this.setState({
         stamps: existingStamps,
         dataIsReturned: true,
@@ -135,7 +135,7 @@ class App extends React.Component {
     .then(() => {
       this.setState({
         numStamps: 0,
-        stamps: Array(10).fill('[]'),
+        stamps: Array(10).fill('⠀'),
         displayReward: false,
         reward: null
       })
@@ -151,15 +151,15 @@ class App extends React.Component {
   previousStampIsStamped(i) {
     const stamps = this.state.stamps.slice();
     if (this.state.numStamps >= 10) {return true}
-    else if (stamps[i] === '[X]') {return true}
-    else if (i !== 0 && stamps[i-1] !== '[X]') {
+    else if (stamps[i] === '♻') {return true}
+    else if (i !== 0 && stamps[i-1] !== '♻') {
       return true}
   }
 
   updateStampCard() {
     const stamps = this.state.stamps.slice();
     this.currentNumStamps()
-      stamps[this.state.stampCode] = '[X]'
+      stamps[this.state.stampCode] = '♻'
       this.setState({
         stamps: stamps,
       });
