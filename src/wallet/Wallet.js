@@ -1,6 +1,7 @@
-import { clippingParents } from '@popperjs/core';
-import React from 'react';
-import { getUserRewardRecords, getRewardRecords } from '../api/RewardsApiInterface.js';
+import React, { useState } from 'react';
+import closedWallet from '../other/wallet-stationary.png';
+import openWallet from '../other/wallet-animated.gif';
+import { getUserRewardRecords, getRewardRecords, patchUserRewards } from '../api/RewardsApiInterface.js';
 
 class Wallet extends React.Component {
   constructor(props) {
@@ -9,10 +10,9 @@ class Wallet extends React.Component {
       records: this.userRewards(),
       rewards: [],
       walletOpen: false,
+      wallet: closedWallet
     };
   }
-
-
 
   userRewards() {
     getUserRewardRecords(this.props.userID).then((records) => {
@@ -23,13 +23,12 @@ class Wallet extends React.Component {
   }
 
   userRewardsContent(records) {
-    console.log(records, 'records')
     const rewards = [];
     var itemsProcessed = 0;
     records.forEach((record, index, array) => {
       if (record.user_id === this.props.userID) {
       getRewardRecords(record.reward_id).then((reward) => {
-        rewards.push(reward);
+        rewards.push({...reward, ...record});
         itemsProcessed++;
         if(itemsProcessed === array.length) {
           this.setState({
@@ -43,7 +42,12 @@ class Wallet extends React.Component {
   }
 
   handleOpenWalletClick() {
-    this.userRewardsContent(this.state.records)
+    this.setState({
+      wallet: openWallet
+    });
+    setTimeout(() => {
+      this.userRewardsContent(this.state.records)
+    }, 1150);
   }
 
   render() {
@@ -51,9 +55,9 @@ class Wallet extends React.Component {
     const walletOpen = this.state.walletOpen;
     let wallet;
     if (walletOpen) {
-      wallet = <OpenWallet rewards={this.state.rewards}/>;
+      wallet = <OpenWallet rewards={this.state.rewards} />;
     } else {
-      wallet = <button onClick={() => this.handleOpenWalletClick()}></button>
+      wallet = <img src={this.state.wallet} onClick={() => this.handleOpenWalletClick()}></img>
     }
     return (
       <div>
@@ -67,20 +71,36 @@ class Wallet extends React.Component {
 export default Wallet;
 
 function OpenWallet(props) {
-  props.rewards.map((reward) => {console.log(reward)})
   return(
-    <div className="open-wallet"> 
-      {props.rewards.map((reward, i) => (
-        <RewardVoucher key={`reward-${i}`} reward_content={reward.reward_content} />
+    <div className="wallet-container"> 
+      {props.rewards.map((reward) => (
+        <RewardVoucher 
+          key={`reward-${reward.id}`} 
+          {...reward}
+          />
       ))}
     </div>
   )
 }
 
-function RewardVoucher(props) {
-  return(
+const RewardVoucher = ({ id, reward_content, redeemed }) => {
+  const [showReward, setShowReward] = useState(!redeemed);
+
+  const onClaimRewardClicked = () => {
+    patchUserRewards(id);
+    setShowReward(false);
+  }
+
+  return (
     <div className="reward-voucher">
-      <p>{props.reward_content}</p>
+      {showReward ? (
+        <div className="active-voucher">
+          <p>{reward_content}</p>
+          <button className="claim-button" onClick={() => onClaimRewardClicked()} >Use Reward!</button>
+        </div>
+      ) : (
+        <p style={{textDecoration: 'line-through'}}>{reward_content}</p>
+      )}      
     </div>
   )
 }

@@ -52,4 +52,17 @@ async function getUserRewardRecords(userID) {
   return userRewardRecords;
 }
 
-export { getRewardRecords, createUserRewardRecord, getUserRewardRecords };
+async function patchUserRewards(rewardID) {
+  let token = localStorage.getItem('token')
+  let result = await axios.patch(`${url}/api/v1/user_rewards/${rewardID}`, {
+    redeemed: true,
+  },
+  {
+    headers: {
+      'Authorization': `token ${token}`
+    }
+  })
+  return result;
+}
+
+export { getRewardRecords, createUserRewardRecord, getUserRewardRecords, patchUserRewards };
