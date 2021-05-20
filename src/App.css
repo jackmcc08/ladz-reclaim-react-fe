@@ -234,3 +234,14 @@ body {
   color: #302718;
   transition: 0.5s;
 }
+
+.voucher-container {
+  position: relative;
+  left: 290px;
+  bottom: 10px;
+  margin-bottom: 10px;
+  width: 25%;
+  height: 100px;
+  border: 2px solid #302718;
+  background-color:#C7AB59;
+}

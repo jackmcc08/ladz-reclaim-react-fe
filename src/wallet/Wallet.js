@@ -92,7 +92,7 @@ const RewardVoucher = ({ id, reward_content, redeemed }) => {
   }
 
   return (
-    <div className="stamp-card">
+    <div className="voucher-container">
       {showReward ? (
         <div className="active-voucher">
           <p>{reward_content}</p>
