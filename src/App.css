@@ -120,6 +120,15 @@ body {
   border-radius: 6%;
 }
 
+.claim-button {
+  color: #C7ab59;
+  font-size: calc(3px + 2vmin);
+  text-shadow: -1px 0 #302718, 0 1px #302718, 1px 0 #302718, 0 -1px #302718;
+  border: 1px solid #302718;
+  background-color: #DED2A8;
+  border-radius: 6%;
+}
+
 .modal_content {
   position: relative;
   right: 60px;

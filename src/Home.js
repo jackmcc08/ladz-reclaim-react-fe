@@ -96,8 +96,8 @@ class Home extends React.Component {
               <Link to='/'>Home</Link>
             </Route>
             <Route exact path="/wallet">
+              <Link className="login-title" to='/'>Home</Link>
               { this.state.loggedIn ? <Wallet userID={this.state.userID} username={this.state.userName} /> : <Redirect to="/" /> }
-              <Link to='/'>Home</Link>
             </Route>
           </Switch>
         </main>
