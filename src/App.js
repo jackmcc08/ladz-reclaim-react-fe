@@ -90,7 +90,7 @@ class StampValidate extends React.Component {
               <input type="text" value={this.state.inputValue} onChange={evt => this.updateInputValue(evt)}/>
             </label>
             <br />
-            <input type="submit" onClick={this.onSubmitCode}/>
+            <input  id="submit-button" type="submit" onClick={this.onSubmitCode}/>
           </form>
         </div>
       </div>
@@ -227,7 +227,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <main className="App-body">
-          <h3>{businessName}</h3>
+          <h3 id="business">{businessName}</h3>
           <div className="stamp-card">
             <StampCard
               stamps={this.state.stamps}
@@ -259,7 +259,7 @@ function AddStamp(props) {
 
 function StampCounter(props) {
   return (
-    <h3>Stamps: {props.numStamps}</h3>
+    <h3 id="stamp-counter">Stamps: {props.numStamps}</h3>
   )
 }
 
@@ -283,7 +283,7 @@ function UseReward(props) {
 }
 
 function RewardScreen(props) {
-  return <h3>{props.reward.reward_content}</h3>
+  return <h3 id="milk-offer">{props.reward.reward_content}</h3>
 }
 
 export default App;
