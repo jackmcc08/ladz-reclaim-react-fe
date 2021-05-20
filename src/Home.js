@@ -57,9 +57,9 @@ class Home extends React.Component {
         <div className="login-div">
           <h3 className="login-title">Hello {this.state.userName}</h3>
           <Link className="sign-up-link" to='/stamps'>Stamps</Link>
-          <br></br>
+
           <Link className="sign-up-link" to='/wallet'>Wallet</Link>
-          <br></br>
+
           <LogoutButton onClick={this.handleLogoutSubmit} />
         </div>
       )

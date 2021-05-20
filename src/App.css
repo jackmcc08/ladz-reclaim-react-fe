@@ -35,13 +35,14 @@ main {
 }
 
 .sign-up-link {
-  padding: 14px 25px;
+  padding: 5px 25px;
   color: #C7ab59;
   font-size: calc(10px + 2vmin);
   text-shadow: -1px 0 #302718, 0 2px #302718, 1px 0 #302718, 0 -1px #302718;
   border: none;
   text-decoration: none;
   background-color: transparent;
+  /* margin-top: 10px; */
   /* text-align: center; */
   /* display: inline-block; */
 }
@@ -65,6 +66,10 @@ main {
   align-items: center;
   margin-top: 10%;
   border-radius: 5px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .login-title {
@@ -91,6 +96,7 @@ main {
   text-shadow: -1px 0 #302718, 0 2px #302718, 1px 0 #302718, 0 -1px #302718;
   border: none;
   background-color: transparent;
+  margin-top: 5px;
 }
 
 .login-button:hover {
@@ -111,7 +117,7 @@ main {
   border: 1px solid #302718;
   padding: 10px;
   align-items: center;
-  margin-top: 10%;
+  margin: 5% 0;
   border-radius: 5px;
   width: 960px;
 }
