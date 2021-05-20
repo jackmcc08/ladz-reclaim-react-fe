@@ -279,7 +279,7 @@ function UseReward(props) {
       className="useReward"
       onClick={props.onClick}
     >
-      Use reward!
+      Add to wallet!
     </button>
   )
 }
