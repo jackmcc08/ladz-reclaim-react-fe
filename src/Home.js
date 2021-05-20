@@ -54,7 +54,7 @@ class Home extends React.Component {
   welcomeDisplay() {
     if (this.state.loggedIn) {
       return (
-        <div className="login-div">
+        <div className="login-div-2">
           <h3 className="login-title">Hello {this.state.userName}</h3>
           <Link className="sign-up-link" to='/stamps'>Stamps</Link>
 
