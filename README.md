@@ -1,4 +1,4 @@
-# Reclaim
+# Reclaim Web App
 ## A React.js frontend application
 ## Makers Academy Final Project - Team LADZ
 
