@@ -6,9 +6,11 @@
 
 The Reclaim web application is a loyalty card application that rewards users for recycling pacakging and promotes small businesses.
 
-The app is comprised of two independent programs - a front end react web app and a backend ruby on rails API.
+The app is comprised of two independent programs - a front end react web app and a backend ruby on rails API. Both are hosted on Heroku.
 
 This is the frontend created with React.js. It is a browser based frontend where the user can sign in, obtain stamps and claim rewards.
+
+[Heroku Live Site](https://reclaim-fe.herokuapp.com/)
 
 [Video Demo](https://youtu.be/0LR2igzIuHQ)
 
