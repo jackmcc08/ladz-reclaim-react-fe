@@ -13,10 +13,11 @@ This is the frontend created with React.js. It is a browser based frontend where
 [Video Demo](https://youtu.be/0LR2igzIuHQ)
 
 The development team:
-- Will Spencer
-- Jack Hooper
-- Alec Yates
-- Jack McCarthy
+- Will Spencer (willspencer16)
+- Jack Hooper (crotchetycrow)
+- Alec Yates (Yates101)
+- Jack McCarthy (jackmcc08)
+
 
 ## To Use
 
